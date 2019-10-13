@@ -1,16 +1,24 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>com.anand.spring</groupId>
   <artifactId>onlineshopping</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
+  
   <name>OnlineShoppingFrontEnd</name>
-  <url>http://maven.apache.org</url>
+  <url>localhost:8080/</url>
   
   <properties>
   	<javaee-version>8.0.1</javaee-version>
+  	<spring-version>5.2.0.RELEASE</spring-version>
+  	<jstl-version>1.2</jstl-version>
+  	<junit-version>4.12</junit-version>
+  	<javax-servlet-api-version>4.0.1</javax-servlet-api-version>
+  	
   	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  	
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
@@ -19,7 +27,7 @@
   	<dependency>
       	<groupId>junit</groupId>
       	<artifactId>junit</artifactId>
-      	<version>3.8.1</version>
+      	<version>${junit-version}</version>
       	<scope>test</scope>
     </dependency>
     <dependency>
@@ -28,21 +36,37 @@
 	   	<version>${javaee-version}</version>
 	 	<scope>provided</scope>
 	</dependency>
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-webmvc</artifactId>
+	    <version>${spring-version}</version>
+	</dependency>
+	<dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-context</artifactId>
+    	<version>${spring-version}</version>
+    </dependency>
+	 <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>${javax-servlet-api-version}</version>
+        <scope>provided</scope>
+    </dependency>
+    <dependency>
+	    <groupId>javax.servlet</groupId>
+	    <artifactId>jstl</artifactId>
+	    <version>${jstl-version}</version>
+	</dependency>
   </dependencies>
   
   <build>
     <finalName>onlineshopping</finalName>
-    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+    <pluginManagement>
       <plugins>
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.1.0</version>
         </plugin>
-        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
-       <!--  <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.0.2</version>
-        </plugin> -->
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
