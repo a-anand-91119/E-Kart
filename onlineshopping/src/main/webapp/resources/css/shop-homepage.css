@@ -22,10 +22,11 @@ Custom Styling
 }
 
 .wrapper-content{
-	padding-bottom: 60px;
+	padding-bottom: 120px;
 }
 .myfooter{
 	position: absolute;
 	bottom: 0;
 	width: 100%;
+	margin-top: 50px;
 }

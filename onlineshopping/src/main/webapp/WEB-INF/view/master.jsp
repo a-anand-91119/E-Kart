@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" isELIgnored="false" isELIgnored = "false"%>
+	pageEncoding="ISO-8859-1" isELIgnored="false" isELIgnored = "false" %>
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
@@ -51,6 +51,10 @@
 			
 			<core:if test="${userClickedOption eq 'contact'}">
 				<jsp:include page="include/contact.jsp"></jsp:include>
+			</core:if>
+			
+			<core:if test="${userClickedOption eq 'category' or userClickedOption eq 'allProducts'}">
+				<jsp:include page="include/categoryProduct.jsp"></jsp:include>
 			</core:if>
 			
 		</div>

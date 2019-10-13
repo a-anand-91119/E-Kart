@@ -10,11 +10,12 @@ $(function() {
 		case "contact":
 			$("#contact").addClass("active");
 			break;
-		case "listProducts":
-			$("#listProducts").addClass("active");
+		case "allProducts":
+			$("#allProducts").addClass("active");
 			break;
 		default:
-			$("#home").addClass("active");
+			$("#allProducts").addClass("active");
+			$("#side_"+menu).addClass("active");
 			break;
 	}
 });
