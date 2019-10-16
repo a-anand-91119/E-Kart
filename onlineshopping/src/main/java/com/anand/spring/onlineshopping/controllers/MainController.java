@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.anand.spring.onlineshopping.utils.Constants;
-import com.anand.spring.shoppingbackend.daoimpl.CategoryDAOImpl;
-import com.anand.spring.shoppingbackend.dto.Category;
+import com.anand.spring.shoppingbackend.dto.CategoryHome;
+import com.anand.spring.shoppingbackend.exceptions.InvalidIdException;
+import com.anand.spring.shoppingbackend.services.CategoryService;
+import com.anand.spring.shoppingbackend.services.ProductService;
 
 /**
  * Main Controller Class For Shopping Application
@@ -20,12 +22,14 @@ import com.anand.spring.shoppingbackend.dto.Category;
 public class MainController {
 
 	@Autowired
-	private CategoryDAOImpl categoryDAOImpl; // TODO change to CategoryService
+	private CategoryService categoryServiceImpl;
+	@Autowired
+	private ProductService productServiceImpl;
 	
 	@RequestMapping(value = {Constants.URL_ROOT, Constants.URL_HOME, Constants.URL_INDEX})
 	public String getMainPage(Model model) {
 		model.addAttribute("userClickedOption", "home");
-		model.addAttribute("categoryData", categoryDAOImpl.findAll());
+		model.addAttribute("categoryData", categoryServiceImpl.getCategoryPreview());
 		model.addAttribute("title", "Online Shopping");
 		model.addAttribute("menu", "home");
 		return "master";
@@ -51,18 +55,26 @@ public class MainController {
 	public String showAllProducts(Model model) {
 		model.addAttribute("title", "All Products");
 		model.addAttribute("userClickedOption", "allProducts");
-		model.addAttribute("categoryData", categoryDAOImpl.findAll());
+		model.addAttribute("categorySidebarData", categoryServiceImpl.getSideBarCategories());
+		model.addAttribute("productData", productServiceImpl.getAllActiveProducts());
+		model.addAttribute("topProducts", productServiceImpl.getHighestRatedProductWallpapers());
 		model.addAttribute("menu", "allProducts");
 		return "master";
 	}
 	
 	@RequestMapping(value = {Constants.URL_CATEGORY_PRODUCTS})
-	public String showProductsOfParticularCategory(Model model, @PathVariable("categoryId") Integer categoryId) {
-		Category category = null;
-		category = (Category) categoryDAOImpl.findById(categoryId);
+	public String showProductsOfParticularCategory(Model model, @PathVariable("categoryId") Long categoryId) {
+		CategoryHome category = null;
+		try {
+			category = (CategoryHome) categoryServiceImpl.findCategoryById(categoryId);
+		} catch (InvalidIdException e) {
+			model.addAttribute("errorMessage", "No Such Category Found");
+		}
 		model.addAttribute("title", category.getCategoryName());
-		model.addAttribute("categoryData", categoryDAOImpl.findAll());
+		model.addAttribute("productData", productServiceImpl.getAllActiveProductsByCategory(category.getCategoryId()));
+		model.addAttribute("categorySidebarData", categoryServiceImpl.getSideBarCategories());
 		model.addAttribute("category", category);
+		model.addAttribute("topProducts", productServiceImpl.getHighestRatedProductWallpapers());
 		model.addAttribute("userClickedOption", "category");
 		model.addAttribute("menu", category.getCategoryName());
 		return "master";

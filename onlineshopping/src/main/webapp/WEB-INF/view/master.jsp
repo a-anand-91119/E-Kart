@@ -16,13 +16,22 @@
 <title>E-Kart ${title}</title>
 
 <core:url var = "bootstrapMinCss" value ="/resources/vendor/bootstrap/css/bootstrap.min.css"/>
+<core:url var = "bootstrapCss" value ="/resources/vendor/bootstrap/css/bootstrap.css"/>
 <core:url var = "pageCss" value ="/resources/css/shop-homepage.css"/>
 <core:url var = "customJs" value ="/resources/js/customJs.js"/>
+<core:url var = "fontAwesomeJs" value ="/resources/js/font-awesome.js"/>
+<core:url var = "jqueryDataTables" value ="/resources/vendor/DataTables/jquery.dataTables.min.js"/>
+<core:url var = "jqueryDataTablesCss" value ="/resources/vendor/DataTables/jquery.dataTables.min.css"/>
+<core:url var = "dataTablesBootstrapResponsiveCss" value ="/resources/vendor/DataTables/dataTables.bootstrap4.min.css"/>
+<core:url var = "dataTablesBootstrapResponsiveJs" value ="/resources/vendor/DataTables/dataTables.bootstrap4.min.js"/>
 <core:url var = "jQuery" value ="/resources/vendor/jquery/jquery.min.js"/>
 <core:url var = "bootstrapMinJs" value ="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"/>
 
 <link href="${bootstrapMinCss}" rel="stylesheet">
+<link href="${bootstrapCss}" rel="stylesheet">
 <link href="${pageCss}" rel="stylesheet">
+<link href="${dataTablesBootstrapResponsiveCss}" rel="stylesheet">
+<link href="${jqueryDataTablesCss}" rel="stylesheet">
 
 <script type="text/javascript">
 	window.menu = '${menu}';
@@ -65,8 +74,11 @@
 		<!-- Footer -->
 		
 		<script type="text/javascript" src="${jQuery}"></script>
+		<script type="text/javascript" src="${fontAwesomeJs}"></script>
+		<script type="text/javascript" src="${jqueryDataTables}"></script>
 		<script type="text/javascript" src="${customJs}"></script>
 		<script type="text/javascript" src="${bootstrapMinJs}"></script>
+		<script type="text/javascript" src="${dataTablesBootstrapResponsiveJs}"></script>
 		
 	</div>
 </body>

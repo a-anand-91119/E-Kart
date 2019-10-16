@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import com.anand.spring.onlineshopping.utils.Constants;
+import com.anand.spring.shoppingbackend.configuration.SpringRootConfiguration;
 
 /**
  * The Web Application Servlet Initializer
