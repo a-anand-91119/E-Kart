@@ -15,6 +15,7 @@ public class ProductDataForAllProducts {
 	@JsonIgnore
 	private String productDescription;
 	private Double productUnitCost;
+	private Integer productQuantity;
 	private Integer productOverallRating;
 	private String productThumbnailUrl;
 
@@ -23,14 +24,23 @@ public class ProductDataForAllProducts {
 	}
 
 	public ProductDataForAllProducts(String productCode, String productName, String productDescription,
-			Double productUnitCost, Integer productOverallRating, String productThumbnailUrl) {
+			Double productUnitCost, Integer productQuantity, Integer productOverallRating, String productThumbnailUrl) {
 		super();
 		this.productCode = productCode;
 		this.productName = productName;
 		this.productDescription = productDescription;
 		this.productUnitCost = productUnitCost;
+		this.productQuantity = productQuantity;
 		this.productOverallRating = productOverallRating;
 		this.productThumbnailUrl = productThumbnailUrl;
+	}
+
+	public Integer getProductQuantity() {
+		return productQuantity;
+	}
+
+	public void setProductQuantity(Integer productQuantity) {
+		this.productQuantity = productQuantity;
 	}
 
 	public String getProductCode() {

@@ -70,6 +70,7 @@ public class TransferUtils {
 								product.getProductRating3(), product.getProductRating4(), product.getProductRating5()));
 				productDataForAllProducts.setProductThumbnailUrl(product.getProductPortraitUrl());
 				productDataForAllProducts.setProductUnitCost(product.getProductUnitPrice());
+				productDataForAllProducts.setProductQuantity(product.getProductQuantity());
 
 				productReturn.add(productDataForAllProducts);
 			}
@@ -164,6 +165,7 @@ public class TransferUtils {
 		productData.setProductRating5(product.getProductRating5());
 		productData.setProductUnitPrice(product.getProductUnitPrice());
 		productData.setProductViews(product.getProductViews());
+		productData.setProductQuantity(product.getProductQuantity());
 		return productData;
 	}
 }

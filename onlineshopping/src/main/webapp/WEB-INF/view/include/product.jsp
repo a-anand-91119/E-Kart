@@ -28,34 +28,65 @@
 				<div class="card-body">
 					<h3 class="card-title">${productInformation.productName}</h3>
 					<h4>&#x20b9; ${productInformation.productUnitPrice}</h4>
+
+					<core:choose>
+						<core:when test="${productInformation.productQuantity le 0}">
+							<strong style="color: red;">Out Of Stock!!</strong><br>
+							<br>
+						</core:when>
+						<core:when
+							test="${productInformation.productQuantity gt 0 and productInformation.productQuantity le 5}">
+							<strong style="color: brown;">Only
+								${productInformation.productQuantity} Left In Stock</strong><br>
+							<br>
+						</core:when>
+						<core:when test="${productInformation.productQuantity gt 5}">
+							<strong style="color: green;">In Stock</strong><br>
+							<br>
+						</core:when>
+					</core:choose>
+
 					<p class="card-text">${productInformation.productDescription}</p>
-					<core:if test="${productInformation.productOverallrating eq 0}">
-						<span class="text-warning">&#9734; &#9734; &#9734; &#9734;
-							&#9734;</span>
-					</core:if>
-					<core:if test="${productInformation.productOverallrating eq 1}">
-						<span class="text-warning">&#9733; &#9734; &#9734; &#9734;
-							&#9734;</span>
-					</core:if>
-					<core:if test="${productInformation.productOverallrating eq 2}">
-						<span class="text-warning">&#9733; &#9733; &#9734; &#9734;
-							&#9734;</span>
-					</core:if>
-					<core:if test="${productInformation.productOverallrating eq 3}">
-						<span class="text-warning">&#9733; &#9733; &#9733; &#9734;
-							&#9734;</span>
-					</core:if>
-					<core:if test="${productInformation.productOverallrating eq 4}">
-						<span class="text-warning">&#9733; &#9733; &#9733; &#9733;
-							&#9734;</span>
-					</core:if>
-					<core:if test="${productInformation.productOverallrating eq 5}">
-						<span class="text-warning">&#9733; &#9733; &#9733; &#9733;
-							&#9733;</span>
-					</core:if>
-					${productInformation.productOverallrating}.0 stars &#160;&#160; <a
-						href="#" class="btn btn-success"> Add To Cart &#160; <i
-						class="fa fa-cart-plus" aria-hidden="true"></i></a>
+					<core:choose>
+						<core:when test="${productInformation.productOverallrating eq 0}">
+							<span class="text-warning">&#9734; &#9734; &#9734; &#9734;
+								&#9734;</span>
+						</core:when>
+						<core:when test="${productInformation.productOverallrating eq 1}">
+							<span class="text-warning">&#9733; &#9734; &#9734; &#9734;
+								&#9734;</span>
+						</core:when>
+						<core:when test="${productInformation.productOverallrating eq 2}">
+							<span class="text-warning">&#9733; &#9733; &#9734; &#9734;
+								&#9734;</span>
+						</core:when>
+						<core:when test="${productInformation.productOverallrating eq 3}">
+							<span class="text-warning">&#9733; &#9733; &#9733; &#9734;
+								&#9734;</span>
+						</core:when>
+						<core:when test="${productInformation.productOverallrating eq 4}">
+							<span class="text-warning">&#9733; &#9733; &#9733; &#9733;
+								&#9734;</span>
+						</core:when>
+						<core:when test="${productInformation.productOverallrating eq 5}">
+							<span class="text-warning">&#9733; &#9733; &#9733; &#9733;
+								&#9733;</span>
+						</core:when>
+					</core:choose>
+					${productInformation.productOverallrating} stars &#160;&#160;
+					<core:choose>
+						<core:when test="${productInformation.productQuantity le 0}">
+							<a href="javascript:void(0)" class="btn btn-success disabled"
+								style="float: right;"> Add To Cart &#160; <i
+								class="fa fa-cart-plus" aria-hidden="true"></i></a>
+						</core:when>
+						<core:when test="${productInformation.productQuantity gt 0}">
+							<a href="#" class="btn btn-success" style="float: right;">
+								Add To Cart &#160; <i class="fa fa-cart-plus" aria-hidden="true"></i>
+							</a>
+						</core:when>
+					</core:choose>
+
 				</div>
 			</div>
 			<!-- /.card -->

@@ -55,6 +55,14 @@ if($table.length){
 				return '&#x20b9; ' + data
 			}
 		}, {
+			data : 'productQuantity',
+			mRender : function(data, type, row) {
+				if(data == 0)
+					return '<strong style="color: red;">Out Of Stock!!</strong>';
+				else
+					return data;
+			}
+		}, {
 			data : 'productOverallRating',
 			bSortable : false,
 			mRender : function(data,type,row) {
@@ -86,7 +94,13 @@ if($table.length){
 			mRender : function(data, type, row) {
 				var str = '';
 				str += '<a href = "' + showUrl + data + '" class = "btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></a> &#160;<br>';
-				str += '<a href = "'+cartUrl + '/product/' + data + '" class = "btn btn-success"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>';
+
+				if(row.productQuantity <= 0){
+					str += '<a href = "javascript:void(0)" class = "btn btn-success disabled"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>';
+
+				}else{
+					str += '<a href = "'+cartUrl + '/product/' + data + '" class = "btn btn-success"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>';
+				}
 				return str;
 			}
 		},

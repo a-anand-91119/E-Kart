@@ -90,6 +90,7 @@ window.imageUrl = '${pageContext.request.contextPath}/resources/images/';
 								<th>Image</th>
 								<th>Product Name</th>
 								<th>Price</th>
+								<th>Quantity</th>
 								<th>Rating</th>
 								<th></th>
 							</tr>
@@ -99,6 +100,7 @@ window.imageUrl = '${pageContext.request.contextPath}/resources/images/';
 								<th>Image</th>
 								<th>Product Name</th>
 								<th>Price</th>
+								<th>Quantity</th>
 								<th>Rating</th>
 								<th></th>
 							</tr>

@@ -6,7 +6,7 @@ package com.anand.spring.shoppingbackend.dto;
  *
  */
 public class ProductData {
-	
+
 	private Long productId;
 	private String productCode;
 	private String productName;
@@ -15,6 +15,7 @@ public class ProductData {
 	private Double productUnitPrice;
 	private Long productCategoryId;
 	private Integer productPurchases;
+	private Integer productQuantity;
 	private Integer productViews;
 	private Integer productRating1;
 	private Integer productRating2;
@@ -31,9 +32,9 @@ public class ProductData {
 
 	public ProductData(Long productId, String productCode, String productName, String productBrand,
 			String productDescription, Double productUnitPrice, Long productCategoryId, Integer productPurchases,
-			Integer productViews, Integer productRating1, Integer productRating2, Integer productRating3,
-			Integer productRating4, Integer productRating5, String productPortraitUrl, String productLandscapeUrl,
-			Integer productOverallrating) {
+			Integer productQuantity, Integer productViews, Integer productRating1, Integer productRating2,
+			Integer productRating3, Integer productRating4, Integer productRating5, String productPortraitUrl,
+			String productLandscapeUrl, Integer productOverallrating) {
 		super();
 		this.productId = productId;
 		this.productCode = productCode;
@@ -43,6 +44,7 @@ public class ProductData {
 		this.productUnitPrice = productUnitPrice;
 		this.productCategoryId = productCategoryId;
 		this.productPurchases = productPurchases;
+		this.productQuantity = productQuantity;
 		this.productViews = productViews;
 		this.productRating1 = productRating1;
 		this.productRating2 = productRating2;
@@ -52,6 +54,14 @@ public class ProductData {
 		this.productPortraitUrl = productPortraitUrl;
 		this.productLandscapeUrl = productLandscapeUrl;
 		this.productOverallrating = productOverallrating;
+	}
+
+	public Integer getProductQuantity() {
+		return productQuantity;
+	}
+
+	public void setProductQuantity(Integer productQuantity) {
+		this.productQuantity = productQuantity;
 	}
 
 	public Long getProductId() {
