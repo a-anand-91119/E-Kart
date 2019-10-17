@@ -6,6 +6,7 @@
 <script>
 window.showUrl= '${pageContext.request.contextPath}/show/product/';
 window.cartUrl= '${pageContext.request.contextPath}/cart/add/';
+window.imageUrl = '${pageContext.request.contextPath}/resources/images/';
 </script>
 <div class="container">
 
@@ -104,58 +105,6 @@ window.cartUrl= '${pageContext.request.contextPath}/cart/add/';
 						</tfoot>
 					</table>
 				</div>
-			</div>
-
-			<div class="row">
-			
-				<core:if test="${function:length(productData) > 0}">
-					<core:forEach items="${productData}" var="productDataForAllProducts">
-						<div class="col-lg-4 col-md-6 mb-4">
-							<div class="card h-100">
-								<a href="#"><img class="card-img-top"
-									src="http://placehold.it/700x400" alt=""></a>
-								<div class="card-body">
-									<h4 class="card-title">
-										<a href="#">${productDataForAllProducts.productName}</a>
-									</h4>
-									<h5> &#x20b9; ${productDataForAllProducts.productUnitCost}</h5>
-									<p class="card-text">${productDataForAllProducts.productDescription}</p>
-								</div>
-								<div class="card-footer">
-									<core:if test="${productDataForAllProducts.productOverallRating eq 0}">
-										<small class="text-muted">&#9734; &#9734; &#9734;
-											&#9734; &#9734;</small>
-									</core:if>
-									<core:if test="${productDataForAllProducts.productOverallRating eq 1}">
-										<small class="text-muted">&#9733; &#9734; &#9734;
-											&#9734; &#9734;</small>
-									</core:if>
-									<core:if test="${productDataForAllProducts.productOverallRating eq 2}">
-										<small class="text-muted">&#9733; &#9733; &#9734;
-											&#9734; &#9734;</small>
-									</core:if>
-									<core:if test="${productDataForAllProducts.productOverallRating eq 3}">
-										<small class="text-muted">&#9733; &#9733; &#9733;
-											&#9734; &#9734;</small>
-									</core:if>
-									<core:if test="${productDataForAllProducts.productOverallRating eq 4}">
-										<small class="text-muted">&#9733; &#9733; &#9733;
-											&#9733; &#9734;</small>
-									</core:if>
-									<core:if test="${productDataForAllProducts.productOverallRating eq 5}">
-										<small class="text-muted">&#9733; &#9733; &#9733;
-											&#9733; &#9733;</small>
-									</core:if>
-								</div>
-							</div>
-						</div>
-					</core:forEach>
-				</core:if>
-				
-				<core:if test="${function:length(productData) <= 0}">
-					<h2>No Products Available Now!. Please Check Back Later</h2>
-				</core:if>
-				
 			</div>
 			<!-- /.row -->
 

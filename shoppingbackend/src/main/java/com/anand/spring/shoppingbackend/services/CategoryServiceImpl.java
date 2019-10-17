@@ -10,7 +10,7 @@ import com.anand.spring.shoppingbackend.dao.DAO;
 import com.anand.spring.shoppingbackend.dto.CategoryHome;
 import com.anand.spring.shoppingbackend.dto.CategorySideBarData;
 import com.anand.spring.shoppingbackend.entities.Category;
-import com.anand.spring.shoppingbackend.exceptions.InvalidIdException;
+import com.anand.spring.shoppingbackend.exceptions.InvalidCategoryIdException;
 import com.anand.spring.shoppingbackend.utils.TransferUtils;
 
 @Service
@@ -29,11 +29,11 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public CategoryHome findCategoryById(Long categoryId) throws InvalidIdException{
+	public CategoryHome findCategoryById(Long categoryId) throws InvalidCategoryIdException{
 		
 		Object category = categoryDAOImpl.findById(categoryId);
 		if(category == null)
-			throw new InvalidIdException("No Categories Found with Id: " + categoryId);
+			throw new InvalidCategoryIdException("No Categories Found with Id: " + categoryId);
 		
 		return TransferUtils.getFullCategoryData((Category) category);
 	}

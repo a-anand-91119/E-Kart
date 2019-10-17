@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.anand.spring.shoppingbackend.dao.DAO;
 import com.anand.spring.shoppingbackend.dao.ProductDAO;
+import com.anand.spring.shoppingbackend.dto.ProductData;
 import com.anand.spring.shoppingbackend.dto.ProductDataForAllProducts;
 import com.anand.spring.shoppingbackend.dto.ProductWallpapersData;
 import com.anand.spring.shoppingbackend.entities.Product;
+import com.anand.spring.shoppingbackend.exceptions.InvalidProductCodeException;
 import com.anand.spring.shoppingbackend.utils.TransferUtils;
 
 @Service
@@ -48,6 +50,12 @@ public class ProductServiceImpl implements ProductService {
 	public List<ProductWallpapersData> getHighestRatedProductWallpapers() {
 		List<Product> fetchedProducts = (List<Product>) ((ProductDAO)productDAOImpl).findTopRated(5);
 		return TransferUtils.getTopProductImages(fetchedProducts);
+	}
+
+	@Override
+	public ProductData getProduct(String productCode) throws InvalidProductCodeException {
+		Product product = ((ProductDAO)productDAOImpl).findByCode(productCode);
+		return TransferUtils.getProductDataForProductDetailsPage(product);
 	}
 
 }

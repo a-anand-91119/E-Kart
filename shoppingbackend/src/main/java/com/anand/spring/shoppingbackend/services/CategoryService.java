@@ -5,7 +5,7 @@ import java.util.List;
 import com.anand.spring.shoppingbackend.dto.CategoryData;
 import com.anand.spring.shoppingbackend.dto.CategoryHome;
 import com.anand.spring.shoppingbackend.dto.CategorySideBarData;
-import com.anand.spring.shoppingbackend.exceptions.InvalidIdException;
+import com.anand.spring.shoppingbackend.exceptions.InvalidCategoryIdException;
 
 public interface CategoryService {
 
@@ -25,7 +25,7 @@ public interface CategoryService {
 	 * @return
 	 * 			A {@link CategoryData} object
 	 */
-	public CategoryHome findCategoryById(Long categoryId) throws InvalidIdException;
+	public CategoryHome findCategoryById(Long categoryId) throws InvalidCategoryIdException;
 	
 	/**
 	 * Method returns CategorySideBarData - Category Id and Category Name

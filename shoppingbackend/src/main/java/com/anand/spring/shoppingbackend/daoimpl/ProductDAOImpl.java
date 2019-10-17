@@ -12,7 +12,8 @@ import org.springframework.stereotype.Repository;
 
 import com.anand.spring.shoppingbackend.dao.ProductDAO;
 import com.anand.spring.shoppingbackend.entities.Product;
-import com.anand.spring.shoppingbackend.exceptions.InvalidIdException;
+import com.anand.spring.shoppingbackend.exceptions.InvalidCategoryIdException;
+import com.anand.spring.shoppingbackend.exceptions.InvalidProductCodeException;
 
 @Repository
 @Transactional
@@ -56,13 +57,13 @@ public class ProductDAOImpl implements ProductDAO{
 	}
 
 	@Override
-	public void deleteById(Object id) throws InvalidIdException {
+	public void deleteById(Object id) throws InvalidCategoryIdException {
 		Product product = (Product) findById(id);
 		
 		if(product != null)
 			delete(product);
 		else
-			throw new InvalidIdException("No Products Found with Id: " + id);
+			throw new InvalidCategoryIdException("No Products Found with Id: " + id);
 	}
 
 	@Override
@@ -98,7 +99,7 @@ public class ProductDAOImpl implements ProductDAO{
 	}
 
 	@Override
-	public void deleteMultiple(Object[] ids) throws InvalidIdException {
+	public void deleteMultiple(Object[] ids) throws InvalidCategoryIdException {
 		
 		for(Object id : ids)
 			deleteById(id);
@@ -116,6 +117,20 @@ public class ProductDAOImpl implements ProductDAO{
 		return sessionFactory.getCurrentSession()
 				.createQuery("FROM Product WHERE productIsActive = :active ORDER BY productViews, productPurchases", Product.class)
 				.setParameter("active", true).setMaxResults(count).getResultList();
+	}
+
+	@Override
+	public Product findByCode(String productCode) throws InvalidProductCodeException {
+		  List<Product> fetchedData = sessionFactory.getCurrentSession()
+				.createQuery("FROM Product WHERE productIsActive = :active AND productCode = :productCode", Product.class)
+				.setParameter("active", true).setParameter("productCode", productCode).getResultList();
+		  
+		  if(fetchedData == null || fetchedData.isEmpty())
+			  throw new InvalidProductCodeException("No Product Found With Entered Product Code: " + productCode);
+		  else if(fetchedData.size() > 1)
+			  throw new InvalidProductCodeException("Multiple Products Exists With Same Product Code: " + productCode);
+		  
+		  return fetchedData.get(0);
 	}
 
 }

@@ -2,7 +2,7 @@ package com.anand.spring.shoppingbackend.dao;
 
 import java.util.List;
 
-import com.anand.spring.shoppingbackend.exceptions.InvalidIdException;
+import com.anand.spring.shoppingbackend.exceptions.InvalidCategoryIdException;
 
 /**
  * 
@@ -17,7 +17,7 @@ public interface DAO {
 
 	public void delete(Object object);
 
-	public void deleteById(Object id) throws InvalidIdException;
+	public void deleteById(Object id) throws InvalidCategoryIdException;
 
 	public Object findById(Object id);
 
@@ -25,5 +25,5 @@ public interface DAO {
 
 	public List<?> findByProperty(String propertyName, Object propertyValue);
 	
-	public void deleteMultiple(Object[] ids) throws InvalidIdException;
+	public void deleteMultiple(Object[] ids) throws InvalidCategoryIdException;
 }

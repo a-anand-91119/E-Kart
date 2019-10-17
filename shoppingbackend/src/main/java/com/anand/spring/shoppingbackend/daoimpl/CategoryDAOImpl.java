@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.anand.spring.shoppingbackend.dao.DAO;
 import com.anand.spring.shoppingbackend.entities.Category;
-import com.anand.spring.shoppingbackend.exceptions.InvalidIdException;
+import com.anand.spring.shoppingbackend.exceptions.InvalidCategoryIdException;
 
 @Repository
 @Transactional
@@ -55,14 +55,14 @@ public class CategoryDAOImpl implements DAO{
 	}
 
 	@Override
-	public void deleteById(Object id) throws InvalidIdException {
+	public void deleteById(Object id) throws InvalidCategoryIdException {
 		
 		Category category = (Category) findById(id);
 		
 		if(category != null)
 			delete(category);
 		else
-			throw new InvalidIdException("No Categories Found with Id: " + id);
+			throw new InvalidCategoryIdException("No Categories Found with Id: " + id);
 	}
 
 	@Override
@@ -97,7 +97,7 @@ public class CategoryDAOImpl implements DAO{
 	}
 
 	@Override
-	public void deleteMultiple(Object[] ids) throws InvalidIdException {
+	public void deleteMultiple(Object[] ids) throws InvalidCategoryIdException {
 		
 		for(Object id : ids)
 			deleteById(id);

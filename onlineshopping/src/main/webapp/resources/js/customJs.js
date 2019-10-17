@@ -26,8 +26,10 @@ var $table = $('#productListTable');
 if($table.length){
 	
 	$table.DataTable({
-		lengthMenu : [[3,5,10,-1],['3 Records', '5 Records', '10 Records', 'All Records']],
-		pageLength : 5,
+		lengthMenu : [[10,20,30,-1],['10 Products', '20 Products', '30 Products', 'All Products']],
+		pageLength : 10,
+		//scrollY : 400,
+		responsive: true,
 		ajax : {
 			url : window.jsonUrl,
 			dataSrc : ''
@@ -35,8 +37,18 @@ if($table.length){
 		columns : [
  			{
 			data : 'productThumbnailUrl',
+			mRender : function(data, type, row) {
+				return '<img src ="' + imageUrl + data + '" style="text-align: center; align-content: center; width: 100%; height: 140px;"/>';
+			}
 		}, {
 			data : 'productName',
+			mRender : function(data, type, row){
+				var str = '';
+				var name = data.split("#####")[0];
+				var desc = data.split("#####")[1];
+				str += '<strong>'+name+'</strong><br>'+'<small>'+desc+'</small>';
+				return str;
+			}
 		}, {
 			data : 'productUnitCost',
 			mRender : function(data, type, row) {
@@ -44,12 +56,36 @@ if($table.length){
 			}
 		}, {
 			data : 'productOverallRating',
+			bSortable : false,
+			mRender : function(data,type,row) {
+				var str = '';
+				switch (data) {
+				case 1:
+					str += '<small class="text-muted">&#9733; &#9734; &#9734; &#9734; &#9734;</small>';
+					break;
+				case 2:
+					str += '<small class="text-muted">&#9733; &#9733; &#9734; &#9734; &#9734;</small>';
+					break;
+				case 3:
+					str += '<small class="text-muted">&#9733; &#9733; &#9733; &#9734; &#9734;</small>';
+					break;
+				case 4:
+					str += '<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>';
+					break;
+				case 5:
+					str += '<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9733;</small>';
+					break;
+				default:
+					str += '<small class="text-muted">&#9734; &#9734; &#9734; &#9734; &#9734;</small>';
+				}
+				return str;
+			}
 		}, {
 			data : 'productCode',
 			bSortable : false,
 			mRender : function(data, type, row) {
 				var str = '';
-				str += '<a href = "' + showUrl + data + '" class = "btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></a> &#160;';
+				str += '<a href = "' + showUrl + data + '" class = "btn btn-primary"><i class="fa fa-eye" aria-hidden="true"></i></a> &#160;<br>';
 				str += '<a href = "'+cartUrl + '/product/' + data + '" class = "btn btn-success"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>';
 				return str;
 			}

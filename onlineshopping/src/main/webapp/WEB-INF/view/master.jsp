@@ -13,7 +13,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>E-Kart ${title}</title>
+<title>E-Kart - ${title}</title>
 
 <core:url var = "bootstrapMinCss" value ="/resources/vendor/bootstrap/css/bootstrap.min.css"/>
 <core:url var = "bootstrapCss" value ="/resources/vendor/bootstrap/css/bootstrap.css"/>
@@ -64,6 +64,10 @@
 			
 			<core:if test="${userClickedOption eq 'category' or userClickedOption eq 'allProducts'}">
 				<jsp:include page="include/categoryProduct.jsp"></jsp:include>
+			</core:if>
+			
+			<core:if test="${userClickedOption eq 'product'}">
+				<jsp:include page="include/product.jsp"></jsp:include>
 			</core:if>
 			
 		</div>
