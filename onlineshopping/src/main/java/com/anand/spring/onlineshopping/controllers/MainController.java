@@ -36,7 +36,7 @@ public class MainController {
 		model.addAttribute("userClickedOption", "home");
 		model.addAttribute("categoryData", categoryServiceImpl.getCategoryPreview());
 		model.addAttribute("title", "Online Shopping");
-		model.addAttribute("menu", "home");
+		model.addAttribute("menu", "homeNav");
 		springLogger.getLogger().info("Inside MainController Root Method");	
 		return "master";
 	}

@@ -18,7 +18,7 @@ import com.anand.spring.shoppingbackend.services.ProductService;
  *
  */
 @Controller
-@RequestMapping("/json/data")
+@RequestMapping(value = {Constants.URL_JSON_DATA})
 public class JsonDataController {
 
 	@Autowired

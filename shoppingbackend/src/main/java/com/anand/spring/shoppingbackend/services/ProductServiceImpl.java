@@ -53,9 +53,19 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public ProductData getProduct(String productCode) throws InvalidProductCodeException {
+	public ProductData getProduct(String productCode) throws InvalidProductCodeException {		
 		Product product = ((ProductDAO)productDAOImpl).findByCode(productCode);
+		
+		product.setProductViews(product.getProductViews() + 1);
+		productDAOImpl.update(product);
+
 		return TransferUtils.getProductDataForProductDetailsPage(product);
+	}
+
+	@Override
+	public void createProduct(ProductData productData) {
+		Product product = TransferUtils.getProductEntityToCreate(productData);
+		productDAOImpl.save(product);
 	}
 
 }

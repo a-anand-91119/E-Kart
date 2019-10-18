@@ -168,4 +168,22 @@ public class TransferUtils {
 		productData.setProductQuantity(product.getProductQuantity());
 		return productData;
 	}
+
+	public static Product getProductEntityToCreate(ProductData productData) {
+		Product product = new Product();
+		product.setProductBrand(productData.getProductBrand());
+		product.setProductCategoryId(productData.getProductCategoryId());
+		product.setProductCode(productData.getProductCode());
+		product.setProductDescription(productData.getProductDescription());
+		product.setProductIsActive(true);
+		product.setProductName(productData.getProductName());
+		product.setProductLandscapeUrl(productData.getProductLandscapeUrl());
+		product.setProductPortraitUrl(productData.getProductPortraitUrl());
+		product.setProductQuantity(productData.getProductQuantity());
+		product.setProductSpecs(productData.getProductSpecification());
+		product.setProductSupplierId(productData.getProductSupplierId());
+		product.setProductUnitPrice(productData.getProductUnitPrice());
+		product.setDefaults();
+		return product;
+	}
 }

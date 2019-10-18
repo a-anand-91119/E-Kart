@@ -23,4 +23,6 @@ public interface ProductService {
 	public List<ProductWallpapersData> getHighestRatedProductWallpapers();
 
 	public ProductData getProduct(String productCode) throws InvalidProductCodeException;
+
+	public void createProduct(ProductData productData);
 }

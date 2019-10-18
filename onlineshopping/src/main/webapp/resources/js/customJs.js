@@ -1,8 +1,8 @@
 $(function() {
 	// active menu
 	switch (menu) {
-		case "home":
-			$("#home").addClass("active");
+		case "homeNav":
+			$("#homeNav").addClass("active");
 			break;
 		case "about":
 			$("#about").addClass("active");
@@ -12,6 +12,9 @@ $(function() {
 			break;
 		case "allProducts":
 			$("#allProducts").addClass("active");
+			break;
+		case "manageProducts":
+			$("#manageProducts").addClass("active");
 			break;
 		default:
 			$("#allProducts").addClass("active");

@@ -1,5 +1,7 @@
 package com.anand.spring.shoppingbackend.dto;
 
+import java.util.UUID;
+
 /**
  * 
  * @author A Anand
@@ -8,9 +10,11 @@ package com.anand.spring.shoppingbackend.dto;
 public class ProductData {
 
 	private Long productId;
+	private Long productSupplierId;
 	private String productCode;
 	private String productName;
 	private String productBrand;
+	private String productSpecification;
 	private String productDescription;
 	private Double productUnitPrice;
 	private Long productCategoryId;
@@ -27,19 +31,20 @@ public class ProductData {
 	private Integer productOverallrating;
 
 	public ProductData() {
-		super();
+		this.productCode = "PRD" + UUID.randomUUID().toString().substring(26).toUpperCase();
 	}
 
 	public ProductData(Long productId, String productCode, String productName, String productBrand,
-			String productDescription, Double productUnitPrice, Long productCategoryId, Integer productPurchases,
-			Integer productQuantity, Integer productViews, Integer productRating1, Integer productRating2,
-			Integer productRating3, Integer productRating4, Integer productRating5, String productPortraitUrl,
-			String productLandscapeUrl, Integer productOverallrating) {
+			String productSpecification, String productDescription, Double productUnitPrice, Long productCategoryId,
+			Integer productPurchases, Integer productQuantity, Integer productViews, Integer productRating1,
+			Integer productRating2, Integer productRating3, Integer productRating4, Integer productRating5,
+			String productPortraitUrl, String productLandscapeUrl, Integer productOverallrating) {
 		super();
 		this.productId = productId;
 		this.productCode = productCode;
 		this.productName = productName;
 		this.productBrand = productBrand;
+		this.productSpecification = productSpecification;
 		this.productDescription = productDescription;
 		this.productUnitPrice = productUnitPrice;
 		this.productCategoryId = productCategoryId;
@@ -54,6 +59,22 @@ public class ProductData {
 		this.productPortraitUrl = productPortraitUrl;
 		this.productLandscapeUrl = productLandscapeUrl;
 		this.productOverallrating = productOverallrating;
+	}
+
+	public Long getProductSupplierId() {
+		return productSupplierId;
+	}
+
+	public void setProductSupplierId(Long productSupplierId) {
+		this.productSupplierId = productSupplierId;
+	}
+
+	public String getProductSpecification() {
+		return productSpecification;
+	}
+
+	public void setProductSpecification(String productSpecification) {
+		this.productSpecification = productSpecification;
 	}
 
 	public Integer getProductQuantity() {

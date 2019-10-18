@@ -5,6 +5,7 @@
 <core:url var = "home" value = "/home"/>
 <core:url var = "contactUs" value = "/contactUs"/>
 <core:url var = "allProducts" value = "/allProducts"/>
+<core:url var = "manageProducts" value = "/manage/products"/>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 	<div class="container">
@@ -16,10 +17,11 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarResponsive">
 			<ul class="navbar-nav ml-auto">
-				<li class="nav-item"><a class="nav-link" href="${home}" id="home">Home
+				<li class="nav-item"><a class="nav-link" href="${home}" id="homeNav">Home
 						<!-- <span class="sr-only">(current)</span> -->
 				</a></li>
 				<li class="nav-item"><a class="nav-link" href="${allProducts}" id="allProducts">View Products</a></li>
+				<li class="nav-item"><a class="nav-link" href="${manageProducts}" id="manageProducts">Manage Products</a></li>
 				<li class="nav-item"><a class="nav-link" href="${about}" id="about">About</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="${contactUs}" id="contact">Contact</a></li>

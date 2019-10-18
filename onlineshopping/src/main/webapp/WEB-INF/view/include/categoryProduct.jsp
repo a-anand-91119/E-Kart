@@ -87,7 +87,7 @@ window.imageUrl = '${pageContext.request.contextPath}/resources/images/';
 						class="table table-striped table-bordered" style="width: 100%">
 						<thead>
 							<tr>
-								<th>Image</th>
+								<th>Image   </th>
 								<th>Product Name</th>
 								<th>Price</th>
 								<th>Quantity</th>
@@ -97,7 +97,7 @@ window.imageUrl = '${pageContext.request.contextPath}/resources/images/';
 						</thead>
 						<tfoot>
 							<tr>
-								<th>Image</th>
+								<th>Image  </th>
 								<th>Product Name</th>
 								<th>Price</th>
 								<th>Quantity</th>

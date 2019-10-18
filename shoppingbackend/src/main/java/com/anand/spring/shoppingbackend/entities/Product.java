@@ -1,7 +1,5 @@
 package com.anand.spring.shoppingbackend.entities;
 
-import java.util.UUID;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +25,7 @@ public class Product {
 
 	@Column(name = "p_name")
 	private String productName;
-	
+
 	@Column(name = "p_specs")
 	private String productSpecs;
 
@@ -83,7 +81,37 @@ public class Product {
 	private Integer productOverallrating;
 
 	public Product() {
-		this.productCode = "PRD" + UUID.randomUUID().toString().substring(26).toUpperCase();
+		super();
+	}
+
+	public Product(Long productId, String productCode, String productName, String productSpecs, String productBrand,
+			String productDescription, Double productUnitPrice, Integer productQuantity, Boolean productIsActive,
+			Long productCategoryId, Long productSupplierId, Integer productPurchases, Integer productViews,
+			Integer productRating1, Integer productRating2, Integer productRating3, Integer productRating4,
+			Integer productRating5, String productPortraitUrl, String productLandscapeUrl,
+			Integer productOverallrating) {
+		super();
+		this.productId = productId;
+		this.productCode = productCode;
+		this.productName = productName;
+		this.productSpecs = productSpecs;
+		this.productBrand = productBrand;
+		this.productDescription = productDescription;
+		this.productUnitPrice = productUnitPrice;
+		this.productQuantity = productQuantity;
+		this.productIsActive = productIsActive;
+		this.productCategoryId = productCategoryId;
+		this.productSupplierId = productSupplierId;
+		this.productPurchases = productPurchases;
+		this.productViews = productViews;
+		this.productRating1 = productRating1;
+		this.productRating2 = productRating2;
+		this.productRating3 = productRating3;
+		this.productRating4 = productRating4;
+		this.productRating5 = productRating5;
+		this.productPortraitUrl = productPortraitUrl;
+		this.productLandscapeUrl = productLandscapeUrl;
+		this.productOverallrating = productOverallrating;
 	}
 
 	public Long getProductId() {
@@ -266,6 +294,16 @@ public class Product {
 				+ ", productRating5=" + productRating5 + ", productPortraitUrl=" + productPortraitUrl
 				+ ", productLandscapeUrl=" + productLandscapeUrl + ", productOverallrating=" + productOverallrating
 				+ "]";
+	}
+
+	public void setDefaults() {
+		this.productRating1 = 0;
+		this.productRating2 = 0;
+		this.productRating3 = 0;
+		this.productRating4 = 0;
+		this.productRating5 = 0;
+		this.productViews = 0;
+		this.productPurchases = 0;
 	}
 
 }

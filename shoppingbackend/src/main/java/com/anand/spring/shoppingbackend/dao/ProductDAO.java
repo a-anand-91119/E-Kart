@@ -17,4 +17,5 @@ public interface ProductDAO extends DAO {
 	public List<?> findTopRated(Integer count);
 	
 	public Product findByCode(String productCode) throws InvalidProductCodeException;
+
 }
