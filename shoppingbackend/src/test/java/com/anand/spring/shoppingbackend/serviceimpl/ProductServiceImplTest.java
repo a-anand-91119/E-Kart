@@ -1,4 +1,4 @@
-package com.anand.spring.shoppingbackend.services;
+package com.anand.spring.shoppingbackend.serviceimpl;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.anand.spring.shoppingbackend.dto.ProductDataForAllProducts;
+import com.anand.spring.shoppingbackend.services.ProductService;
 
 public class ProductServiceImplTest {
 

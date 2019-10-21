@@ -1,44 +1,21 @@
 package com.anand.spring.shoppingbackend.dto;
 
-import java.util.UUID;
-
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Length;
-import org.springframework.web.multipart.MultipartFile;
-
 /**
+ * Product Data For Admin Data Table
  * 
  * @author A Anand
  *
  */
-public class ProductData {
+public class ProductAdminData {
 
 	private Long productId;
 	private Long productSupplierId;
 	private String productCode;
-
-	@NotBlank(message = "Product Name Is Mandatory")
-	@Length(max = 100, message = "Maximum of 100 Characters Allowed For Product Name")
 	private String productName;
-
-	@NotBlank(message = "Product Brand Name Is Mandatory")
-	@Length(max = 50, message = "Maximum of 50 Characters Allowed For Product Brand Name")
 	private String productBrand;
-
-	@Length(max = 2000, message = "Maximum of 2000 Characters Allowed For Product Specs")
 	private String productSpecification;
-
-	@NotBlank(message = "Product Description Is Mandatory")
 	private String productDescription;
-
-	@NotNull(message = "Product Unit Price Is Mandatory")
-	@Min(value = 1, message = "Minimum Price Of Product is 1 Rupee")
 	private Double productUnitPrice;
-
-	@NotNull(message = "All Products Must Be Attached To A Category")
 	private Long productCategoryId;
 	private Integer productPurchases;
 	private Integer productQuantity;
@@ -51,21 +28,21 @@ public class ProductData {
 	private String productPortraitUrl;
 	private String productLandscapeUrl;
 	private Integer productOverallrating;
+	private Boolean productIsActive;
 
-	private MultipartFile productLandscapeImage;
-	private MultipartFile productPortraitImage;
-
-	public ProductData() {
-		this.productCode = "PRD" + UUID.randomUUID().toString().substring(26).toUpperCase();
+	public ProductAdminData() {
+		super();
 	}
 
-	public ProductData(Long productId, String productCode, String productName, String productBrand,
-			String productSpecification, String productDescription, Double productUnitPrice, Long productCategoryId,
-			Integer productPurchases, Integer productQuantity, Integer productViews, Integer productRating1,
-			Integer productRating2, Integer productRating3, Integer productRating4, Integer productRating5,
-			String productPortraitUrl, String productLandscapeUrl, Integer productOverallrating) {
+	public ProductAdminData(Long productId, Long productSupplierId, String productCode, String productName,
+			String productBrand, String productSpecification, String productDescription, Double productUnitPrice,
+			Long productCategoryId, Integer productPurchases, Integer productQuantity, Integer productViews,
+			Integer productRating1, Integer productRating2, Integer productRating3, Integer productRating4,
+			Integer productRating5, String productPortraitUrl, String productLandscapeUrl, Integer productOverallrating,
+			Boolean productIsActive) {
 		super();
 		this.productId = productId;
+		this.productSupplierId = productSupplierId;
 		this.productCode = productCode;
 		this.productName = productName;
 		this.productBrand = productBrand;
@@ -84,46 +61,15 @@ public class ProductData {
 		this.productPortraitUrl = productPortraitUrl;
 		this.productLandscapeUrl = productLandscapeUrl;
 		this.productOverallrating = productOverallrating;
+		this.productIsActive = productIsActive;
 	}
 
-	public MultipartFile getProductLandscapeImage() {
-		return productLandscapeImage;
+	public Boolean isProductIsActive() {
+		return productIsActive;
 	}
 
-	public void setProductLandscapeImage(MultipartFile productLandscapeImage) {
-		this.productLandscapeImage = productLandscapeImage;
-	}
-
-	public MultipartFile getProductPortraitImage() {
-		return productPortraitImage;
-	}
-
-	public void setProductPortraitImage(MultipartFile productPortraitImage) {
-		this.productPortraitImage = productPortraitImage;
-	}
-
-	public Long getProductSupplierId() {
-		return productSupplierId;
-	}
-
-	public void setProductSupplierId(Long productSupplierId) {
-		this.productSupplierId = productSupplierId;
-	}
-
-	public String getProductSpecification() {
-		return productSpecification;
-	}
-
-	public void setProductSpecification(String productSpecification) {
-		this.productSpecification = productSpecification;
-	}
-
-	public Integer getProductQuantity() {
-		return productQuantity;
-	}
-
-	public void setProductQuantity(Integer productQuantity) {
-		this.productQuantity = productQuantity;
+	public void setProductIsActive(Boolean productIsActive) {
+		this.productIsActive = productIsActive;
 	}
 
 	public Long getProductId() {
@@ -132,6 +78,14 @@ public class ProductData {
 
 	public void setProductId(Long productId) {
 		this.productId = productId;
+	}
+
+	public Long getProductSupplierId() {
+		return productSupplierId;
+	}
+
+	public void setProductSupplierId(Long productSupplierId) {
+		this.productSupplierId = productSupplierId;
 	}
 
 	public String getProductCode() {
@@ -156,6 +110,14 @@ public class ProductData {
 
 	public void setProductBrand(String productBrand) {
 		this.productBrand = productBrand;
+	}
+
+	public String getProductSpecification() {
+		return productSpecification;
+	}
+
+	public void setProductSpecification(String productSpecification) {
+		this.productSpecification = productSpecification;
 	}
 
 	public String getProductDescription() {
@@ -188,6 +150,14 @@ public class ProductData {
 
 	public void setProductPurchases(Integer productPurchases) {
 		this.productPurchases = productPurchases;
+	}
+
+	public Integer getProductQuantity() {
+		return productQuantity;
+	}
+
+	public void setProductQuantity(Integer productQuantity) {
+		this.productQuantity = productQuantity;
 	}
 
 	public Integer getProductViews() {
@@ -264,14 +234,29 @@ public class ProductData {
 
 	@Override
 	public String toString() {
-		return "ProductData [productId=" + productId + ", productCode=" + productCode + ", productName=" + productName
-				+ ", productBrand=" + productBrand + ", productDescription=" + productDescription
+		return "ProductAdminData [productId=" + productId + ", productSupplierId=" + productSupplierId
+				+ ", productCode=" + productCode + ", productName=" + productName + ", productBrand=" + productBrand
+				+ ", productSpecification=" + productSpecification + ", productDescription=" + productDescription
 				+ ", productUnitPrice=" + productUnitPrice + ", productCategoryId=" + productCategoryId
-				+ ", productPurchases=" + productPurchases + ", productViews=" + productViews + ", productRating1="
-				+ productRating1 + ", productRating2=" + productRating2 + ", productRating3=" + productRating3
-				+ ", productRating4=" + productRating4 + ", productRating5=" + productRating5 + ", productPortraitUrl="
-				+ productPortraitUrl + ", productLandscapeUrl=" + productLandscapeUrl + ", productOverallrating="
-				+ productOverallrating + "]";
+				+ ", productPurchases=" + productPurchases + ", productQuantity=" + productQuantity + ", productViews="
+				+ productViews + ", productRating1=" + productRating1 + ", productRating2=" + productRating2
+				+ ", productRating3=" + productRating3 + ", productRating4=" + productRating4 + ", productRating5="
+				+ productRating5 + ", productPortraitUrl=" + productPortraitUrl + ", productLandscapeUrl="
+				+ productLandscapeUrl + ", productOverallrating=" + productOverallrating + ", productIsActive="
+				+ productIsActive + ", isProductIsActive()=" + isProductIsActive() + ", getProductId()="
+				+ getProductId() + ", getProductSupplierId()=" + getProductSupplierId() + ", getProductCode()="
+				+ getProductCode() + ", getProductName()=" + getProductName() + ", getProductBrand()="
+				+ getProductBrand() + ", getProductSpecification()=" + getProductSpecification()
+				+ ", getProductDescription()=" + getProductDescription() + ", getProductUnitPrice()="
+				+ getProductUnitPrice() + ", getProductCategoryId()=" + getProductCategoryId()
+				+ ", getProductPurchases()=" + getProductPurchases() + ", getProductQuantity()=" + getProductQuantity()
+				+ ", getProductViews()=" + getProductViews() + ", getProductRating1()=" + getProductRating1()
+				+ ", getProductRating2()=" + getProductRating2() + ", getProductRating3()=" + getProductRating3()
+				+ ", getProductRating4()=" + getProductRating4() + ", getProductRating5()=" + getProductRating5()
+				+ ", getProductPortraitUrl()=" + getProductPortraitUrl() + ", getProductLandscapeUrl()="
+				+ getProductLandscapeUrl() + ", getProductOverallrating()=" + getProductOverallrating()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
 	}
 
 }

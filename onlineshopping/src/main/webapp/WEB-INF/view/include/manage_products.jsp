@@ -1,91 +1,195 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+	pageEncoding="ISO-8859-1" isELIgnored="false"%>
 <%@ taglib prefix="core" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="function"
+	uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<div class="container register">
-	<core:if test="${not empty message}">
+<core:url var="home" value="/home" />
+<core:url var="addProduct" value="/manage/products/add" />
+<core:url var="switchCss" value="/resources/css/switch.css" />
+
+<link href="${switchCss}" rel="stylesheet">
+<script>
+	window.showUrl = '${pageContext.request.contextPath}/show/product/';
+	window.imageUrl = '${pageContext.request.contextPath}/resources/images/';
+	window.editUrl = '${pageContext.request.contextPath}/manage/product/';
+</script>
+
+<div class="container">
+	<core:if test="${message eq 'insertSuccess'}">
 		<script>
-		Swal.fire({
-			  type: 'success',
-			  title: 'Product Successfully Saved!',
-			  showConfirmButton: false,
-			  timer: 3000,
-			  footer: 'Your Product Is Now Visible To Million Of E-Kart Users'
+			Swal
+					.fire({
+						type : 'success',
+						title : 'Product Successfully Saved!',
+						showConfirmButton : false,
+						timer : 2000,
+						footer : 'Your Product Is Now Visible To Million Of E-Kart Users'
+					})
+		</script>
+	</core:if>
+	<core:if test="${message eq 'updateSuccess'}">
+		<script>
+			Swal
+					.fire({
+						type : 'success',
+						title : 'Product Successfully Updated!',
+						showConfirmButton : false,
+						timer : 2000,
+						footer : 'Your Product Is Now Visible To Million Of E-Kart Users'
+					})
+		</script>
+	</core:if>
+	<core:if test="${message eq 'categorySaveSuccess'}">
+		<script>
+			Swal.fire({
+				type : 'success',
+				title : 'Category Created Successfully!',
+				showConfirmButton : false,
+				timer : 1000,
+				footer : 'You Can Now Add Products To The New Category'
 			})
 		</script>
 	</core:if>
-	<form:form modelAttribute="productData" action="save" method="POST">
-		<div class="row">
-			<div class="col-md-3 register-left">
-				<img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
-				<h3>Product Management</h3>
-				<p>Here You Can Add, Edit, Delete Your Products</p>
-				<!-- <input type="submit" name="" value="Login" /><br /> -->
-			</div>
-			<div class="col-md-9 register-right">
+	<core:if test="${message eq 'categorySaveFailed'}">
+		<script>
+			Swal.fire({
+				type : 'error',
+				title : 'Failed To Create Category!',
+				showConfirmButton : false,
+				timer : 1000,
+				footer : 'Please Try Again or Contact Admin'
+			})
+		</script>
+	</core:if>
+	<div class="row">
 
-				<div class="tab-content" id="myTabContent">
-					<div class="tab-pane fade show active" id="home" role="tabpanel"
-						aria-labelledby="home-tab">
-						<h3 class="register-heading">Add A New Product</h3>
-						<div class="row register-form">
-							<div class="col-md-6">
-								<div class="form-group">
-									<form:input type="text" path="productName" class="form-control"
-										name="productName" placeholder="Product Name*" value="" />
+		<script>
+			window.adminJsonUrl = '${pageContext.request.contextPath}/json/data/manage/products';
+			window.activationUrl = '${pageContext.request.contextPath}/manage/products/';
+		</script>
+
+		<div class="row" style="margin-bottom: 20px;">
+			<div class="col-lg-12" style="margin-bottom: 20px;">
+				<span style="font-size: 40px;">Manage All Products</span>
+				<div style="float: right; align-items: center; padding-top: 20px;">
+					<button type="button" data-toggle="modal"
+						data-target="#addCategoryModal" class="btn btn-warning">
+						<strong>Add Category</strong>
+					</button>
+					<a href="${addProduct}"><button type="button"
+							data-toggle="modal" data-target="#addCategoryModal"
+							class="btn btn-warning">
+							<strong>Add New Product</strong>
+						</button></a>
+				</div>
+			</div>
+			<div class="col-lg-12">
+				<table id="adminProductsTable"
+					class="table table-striped table-bordered" style="width: 100%">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Image</th>
+							<th>Product Code</th>
+							<th>Product Name</th>
+							<th>Price</th>
+							<th>Quantity</th>
+							<th>Active</th>
+							<th>Edit</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>4</td>
+							<td><img src="' + imageUrl + data + '"
+								style="text-align: center; align-content: center; width: 100%; height: 140px;"
+								alt="OnePlus 7T PRO" /></td>
+							<td>PRDOP7P53999</td>
+							<td><strong>OnePlus 7T PRO</strong><br> <small>The
+									all new OnePlus 7T Pro Powered by Qualcomm Snapdragon 855 Plus
+									(Octa-core, 7nm, up to 2.96 GHz) with Qualcomm AI Engine.
+									Equipped with 90hz Fluid display, a Triple Rear camera with
+									Telephoto and Ultra wide angel lens, that can capture 4K video
+									@ 30/60 FPS with modes like UltraShot, Nightscape, Portrait,
+									Pro Mode, Panorama, HDR, AI Scene Detection, RAW Image. Face
+									Unlock, HDR, Screen Flash, Face Retouching, In-built -
+									Fingerprint.</small></td>
+							<td>53999.00</td>
+							<td>100</td>
+							<td>
+								<div class="toggle-btn active">
+									<input type="checkbox" checked class="cb-value" /> <span
+										class="round-btn"></span>
 								</div>
-								<div class="form-group">
-									<form:input type="text" path="productSpecification"
-										class="form-control" name="productSpecification"
-										placeholder="Product Specification *" value="" />
-								</div>
-								<div class="form-group">
-									<form:input type="text" class="form-control"
-										path="productBrand" name="productBrand"
-										placeholder="Product Brand *" value="" />
-								</div>
-								<div class="form-group">
-									<form:textarea rows="5" cols="5" minlength="100"
-										path="productDescription" class="form-control"
-										name="productDescription" placeholder="Product Description *"></form:textarea>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<form:input type="number" class="form-control"
-										path="productUnitPrice" name="productUnitPrice"
-										placeholder="Product Unit Price *" value="" />
-								</div>
-								<div class="form-group">
-									<form:input type="number" path="productQuantity"
-										class="form-control" name="productQuantity"
-										placeholder="Quantity Available *" value="" />
-								</div>
-								<div class="form-group">
-									<form:select class="form-control" path="productCategoryId"
-										name="productCategory">
-										 <form:option value="0" label="Please Choose A Category" disabled="true"/>
-										<form:options items="${categories}" itemLabel="categoryName"
-											itemValue="categoryId" />
-									</form:select>
-								</div>
-								<form:hidden path="productPurchases" />
-								<form:hidden path="productViews" />
-								<form:hidden path="productRating1" />
-								<form:hidden path="productRating2" />
-								<form:hidden path="productRating3" />
-								<form:hidden path="productRating4" />
-								<form:hidden path="productRating5" />
-								<form:hidden path="productPortraitUrl" />
-								<form:hidden path="productLandscapeUrl" />
-								<form:hidden path="productOverallrating" />
-								<input type="submit" class="btnRegister" value="Save Product" />
-							</div>
+							</td>
+							<td><a href="javascript:void(0)" class="btn btn-success"><i
+									class="fa fa-pencil" aria-hidden="true"></i> </a></td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<th>Id</th>
+							<th>Image</th>
+							<th>Product Code</th>
+							<th>Product Name</th>
+							<th>Price</th>
+							<th>Quantity</th>
+							<th>Active</th>
+							<th>Edit</th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+		<!-- /.row -->
+
+
+	</div>
+	<!-- /.row -->
+
+	<!-- Add Category Modal -->
+	<div class="modal fade" id="addCategoryModal" role="dialog"
+		tabindex="-1">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content" style="padding: 10px;">
+				<div class="model-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+					<h4 style="text-align: center;">Add New Category</h4>
+				</div>
+				<hr style="margin: 20px 0;" />
+				<div class="modal-body">
+					<form:form id="createNewCategory"
+						modelAttribute="createNewCategory"
+						action="${pageContext.request.contextPath}/manage/category/add"
+						method="POST" class="form-horizontal"
+						enctype="multipart/form-data">
+						<div class="form-group">
+							<form:input type="text" path="categoryName" class="form-control"
+								name="categoryName" placeholder="Category Name*" value=""
+								maxlength="100" required="true" minLength="5" />
 						</div>
-					</div>
+						<div class="form-group">
+							<form:textarea rows="5" cols="5" minlength="100" required="true"
+								path="categoryDescription" class="form-control"
+								name="categoryDescription" placeholder="Category Description *"></form:textarea>
+						</div>
+						<div class="form-group">
+							<form:input type="file" path="categoryThumbnail"
+								class="form-control" name="categoryThumbnail" required="true"
+								title="Select Category Thumbnail Image" value=""
+								style="padding-bottom:45px;" />
+						</div>
+						<input type="submit" class="btnRegister" value="Create Category" />
+					</form:form>
 				</div>
 			</div>
 		</div>
-	</form:form>
+	</div>
+
+	<!-- Add Category Modal -->
 </div>
+<!-- /.container -->

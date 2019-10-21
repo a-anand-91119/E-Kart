@@ -2,6 +2,9 @@ package com.anand.spring.shoppingbackend.services;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
+import com.anand.spring.shoppingbackend.dto.ProductAdminData;
 import com.anand.spring.shoppingbackend.dto.ProductData;
 import com.anand.spring.shoppingbackend.dto.ProductDataForAllProducts;
 import com.anand.spring.shoppingbackend.dto.ProductWallpapersData;
@@ -25,4 +28,12 @@ public interface ProductService {
 	public ProductData getProduct(String productCode) throws InvalidProductCodeException;
 
 	public void createProduct(ProductData productData);
+
+	public List<ProductAdminData> getAllProductsForAdmin();
+
+	public Boolean changeProductStatus(String productCode) throws InvalidProductCodeException;
+
+	public ProductData getProductForEdit(String productCode) throws InvalidProductCodeException;
+
+	public void updateProduct(@Valid ProductData productData);
 }

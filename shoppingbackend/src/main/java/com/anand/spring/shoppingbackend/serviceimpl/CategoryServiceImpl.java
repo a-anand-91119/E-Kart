@@ -1,4 +1,4 @@
-package com.anand.spring.shoppingbackend.services;
+package com.anand.spring.shoppingbackend.serviceimpl;
 
 import java.util.List;
 
@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.anand.spring.shoppingbackend.dao.DAO;
+import com.anand.spring.shoppingbackend.dto.CategoryData;
 import com.anand.spring.shoppingbackend.dto.CategoryHome;
 import com.anand.spring.shoppingbackend.dto.CategorySideBarData;
 import com.anand.spring.shoppingbackend.entities.Category;
 import com.anand.spring.shoppingbackend.exceptions.InvalidCategoryIdException;
+import com.anand.spring.shoppingbackend.services.CategoryService;
 import com.anand.spring.shoppingbackend.utils.TransferUtils;
 
 @Service
@@ -23,18 +25,18 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public List<CategoryHome> getCategoryPreview() {
-		
+
 		List<Category> categoryDatas = (List<Category>) categoryDAOImpl.findAll();
 		return TransferUtils.getCategoryForHomePage(categoryDatas);
 	}
 
 	@Override
-	public CategoryHome findCategoryById(Long categoryId) throws InvalidCategoryIdException{
-		
+	public CategoryHome findCategoryById(Long categoryId) throws InvalidCategoryIdException {
+
 		Object category = categoryDAOImpl.findById(categoryId);
-		if(category == null)
+		if (category == null)
 			throw new InvalidCategoryIdException("No Categories Found with Id: " + categoryId);
-		
+
 		return TransferUtils.getFullCategoryData((Category) category);
 	}
 
@@ -42,6 +44,12 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<CategorySideBarData> getSideBarCategories() {
 		List<Category> categoryDatas = (List<Category>) categoryDAOImpl.findAll();
 		return TransferUtils.getCategorySideBarDatas(categoryDatas);
+	}
+
+	@Override
+	public boolean addCategory(CategoryData categoryData) {
+		Category category = TransferUtils.getCategoryForDbInsert(categoryData);
+		return categoryDAOImpl.save(category);
 	}
 
 }

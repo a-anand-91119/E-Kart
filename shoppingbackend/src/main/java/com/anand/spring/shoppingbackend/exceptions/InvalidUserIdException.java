@@ -5,15 +5,15 @@ package com.anand.spring.shoppingbackend.exceptions;
  * @author A Anand
  *
  */
-public class InvalidCategoryIdException extends InvalidIdException {
-
+public class InvalidUserIdException extends InvalidIdException {
+	
 	private static final long serialVersionUID = 1L;
 
-	public InvalidCategoryIdException() {
+	public InvalidUserIdException() {
 		super();
 	}
 
-	public InvalidCategoryIdException(String exceptionMessage) {
+	public InvalidUserIdException(String exceptionMessage) {
 		super(exceptionMessage);
 	}
 }

@@ -1,7 +1,9 @@
 package com.anand.spring.onlineshopping.configuration;
 
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration.Dynamic;
 
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
@@ -37,6 +39,22 @@ public class OnlineShoppingDispatcherServletInitializer extends AbstractAnnotati
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		super.onStartup(servletContext);
+	}
+	
+	/**
+	 * maxFileSize: Maximum Size of the file to be uploaded
+	 * maxRequestSize: Maximum Size of the multipart/form-data request
+	 * fileSizeThreshold: Size threshold after which the file will be written to disk
+	 * 
+	 * The Size are in bytes
+	 * 1024  * 1024  *  1 = 1MB
+	 * 1024  * 1024  *  2 = 2MB
+	 * 1024  * 1024  *  4 = 4MB
+	 */
+	@Override
+	protected void customizeRegistration(Dynamic registration) {
+		MultipartConfigElement multipartConfigElement = new MultipartConfigElement("/", 2097152, 8388608, 1048576);
+		registration.setMultipartConfig(multipartConfigElement);
 	}
 	
 	@Override

@@ -132,5 +132,24 @@ public class ProductDAOImpl implements ProductDAO{
 		  
 		  return fetchedData.get(0);
 	}
+	
+	@Override
+	public Product findAllByCode(String productCode) throws InvalidProductCodeException {
+		  List<Product> fetchedData = sessionFactory.getCurrentSession()
+				.createQuery("FROM Product WHERE productCode = :productCode", Product.class)
+				.setParameter("productCode", productCode).getResultList();
+		  
+		  if(fetchedData == null || fetchedData.isEmpty())
+			  throw new InvalidProductCodeException("No Product Found With Entered Product Code: " + productCode);
+		  else if(fetchedData.size() > 1)
+			  throw new InvalidProductCodeException("Multiple Products Exists With Same Product Code: " + productCode);
+		  
+		  return fetchedData.get(0);
+	}
+
+	@Override
+	public List<?> findAllForAdmin() {
+		return sessionFactory.getCurrentSession().createQuery("FROM Product").getResultList();
+	}
 
 }

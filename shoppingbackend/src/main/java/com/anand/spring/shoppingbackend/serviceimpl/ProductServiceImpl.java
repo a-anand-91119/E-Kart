@@ -1,6 +1,8 @@
-package com.anand.spring.shoppingbackend.services;
+package com.anand.spring.shoppingbackend.serviceimpl;
 
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -8,11 +10,13 @@ import org.springframework.stereotype.Service;
 
 import com.anand.spring.shoppingbackend.dao.DAO;
 import com.anand.spring.shoppingbackend.dao.ProductDAO;
+import com.anand.spring.shoppingbackend.dto.ProductAdminData;
 import com.anand.spring.shoppingbackend.dto.ProductData;
 import com.anand.spring.shoppingbackend.dto.ProductDataForAllProducts;
 import com.anand.spring.shoppingbackend.dto.ProductWallpapersData;
 import com.anand.spring.shoppingbackend.entities.Product;
 import com.anand.spring.shoppingbackend.exceptions.InvalidProductCodeException;
+import com.anand.spring.shoppingbackend.services.ProductService;
 import com.anand.spring.shoppingbackend.utils.TransferUtils;
 
 @Service
@@ -64,8 +68,33 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public void createProduct(ProductData productData) {
-		Product product = TransferUtils.getProductEntityToCreate(productData);
+		Product product = TransferUtils.getProductEntityToCreate(productData, true);
 		productDAOImpl.save(product);
+	}
+
+	@Override
+	public List<ProductAdminData> getAllProductsForAdmin() {
+		List<Product> fetchedData = (List<Product>) ((ProductDAO)productDAOImpl).findAllForAdmin();
+		return TransferUtils.getAllProductsForAdmin(fetchedData);
+	}
+
+	@Override
+	public Boolean changeProductStatus(String productCode) throws InvalidProductCodeException {
+		Product fetchedProduct = ((ProductDAO)productDAOImpl).findAllByCode(productCode);
+		fetchedProduct.setProductIsActive(!fetchedProduct.getProductIsActive());
+		return productDAOImpl.update(fetchedProduct);
+	}
+
+	@Override
+	public ProductData getProductForEdit(String productCode) throws InvalidProductCodeException {
+		Product product = ((ProductDAO)productDAOImpl).findByCode(productCode);
+		return TransferUtils.getProductDataForEdit(product);
+	}
+
+	@Override
+	public void updateProduct(@Valid ProductData productData) {
+		Product product = TransferUtils.getProductEntityToCreate(productData, false);
+		productDAOImpl.update(product);
 	}
 
 }

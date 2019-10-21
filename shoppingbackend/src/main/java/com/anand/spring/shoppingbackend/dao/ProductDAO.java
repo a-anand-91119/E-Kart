@@ -18,4 +18,7 @@ public interface ProductDAO extends DAO {
 	
 	public Product findByCode(String productCode) throws InvalidProductCodeException;
 
+	public List<?> findAllForAdmin();
+
+	public Product findAllByCode(String productCode) throws InvalidProductCodeException;
 }

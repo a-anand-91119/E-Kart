@@ -34,4 +34,13 @@ public interface CategoryService {
 	 * 		a list of {@link CategorySideBarData}
 	 */
 	public List<CategorySideBarData> getSideBarCategories();
+	
+	/**
+	 * Creates a new Category
+	 * 
+	 * @param categoryData
+	 * 			the category to be createds
+	 * @return true if category is created successfully, else returns false
+	 */
+	public boolean addCategory(CategoryData categoryData);
 }

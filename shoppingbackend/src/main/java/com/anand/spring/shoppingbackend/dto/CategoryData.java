@@ -1,11 +1,19 @@
 package com.anand.spring.shoppingbackend.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
+/**
+ * 
+ * @author A Anand
+ *
+ */
 public class CategoryData {
-	
+
 	private Long categoryId;
 	private String categoryName;
 	private String categoryDescription;
 	private String categoryThumbnailUrl;
+	private MultipartFile categoryThumbnail;
 
 	public CategoryData() {
 		super();
@@ -17,6 +25,14 @@ public class CategoryData {
 		this.categoryName = categoryName;
 		this.categoryDescription = categoryDescription;
 		this.categoryThumbnailUrl = categoryThumbnailUrl;
+	}
+
+	public MultipartFile getCategoryThumbnail() {
+		return categoryThumbnail;
+	}
+
+	public void setCategoryThumbnail(MultipartFile categoryThumbnail) {
+		this.categoryThumbnail = categoryThumbnail;
 	}
 
 	public Long getCategoryId() {

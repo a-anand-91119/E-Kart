@@ -1,3 +1,5 @@
+DROP ALL OBJECTS;
+
 CREATE TABLE CATEGORY (
 
 	c_id IDENTITY,
@@ -37,6 +39,34 @@ CREATE TABLE USER_DETAILS (
 
 );
 
+CREATE TABLE ADDRESS (
+
+	a_id IDNENTITY,
+	a_user_id INT,
+	a_addressline_one VARCHAR(1000),
+	a_addressline_two VARCHAR(1000),
+	a_city VARCHAR (100),
+	a_state VARCHAR(100),
+	a_country VARCHAR(100),
+	a_postal_code VARCHAR(20),
+	a_shipping BOOLEAN,
+	a_billing BOOLEAN,
+	
+	CONSTRAINT PK_ADDRESS_ID PRIMARY KEY (a_id),
+	CONSTRAINT FK_ADDRESS_USER_ID FOREIGN KEY (a_user_id) REFERENCES USER_DETAILS (ud_Id)
+);
+
+CREATE TABLE SHOPPING_CART (
+
+	sc_id IDENTITY,
+	sc_user_id INT,
+	sc_cart_line INT,
+	sc_total DOUBLE
+	
+	CONSTRAINT PK_SHOPPING_CART PRIMARY KEY (sc_id),
+	CONSTRAINT FK_SHOPPING_CART_USER_ID FOREIGN KEY (sc_user_id) REFERENCES USER_DETAILS (ud_Id)
+); 
+
 INSERT INTO USER_DETAILS(ud_first_name, ud_last_name, ud_role, ud_enabled, ud_password, ud_email_address, ud_phone_number)
 VALUES ('Anand', 'A', 'ADMIN', true, '********', 'asd@gmail.com', '9876543210');
 
@@ -52,7 +82,7 @@ CREATE TABLE PRODUCT (
 	p_code VARCHAR(20),
 	p_name VARCHAR(100),
 	p_specs VARCHAR(2000),
-	p_brand VARCHAR(20),
+	p_brand VARCHAR(50),
 	p_description CLOB,
 	p_unit_price DECIMAL(10,2),
 	p_quantity INT,

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.anand.spring.onlineshopping.utils.Constants;
+import com.anand.spring.shoppingbackend.dto.ProductAdminData;
 import com.anand.spring.shoppingbackend.dto.ProductDataForAllProducts;
 import com.anand.spring.shoppingbackend.services.ProductService;
 
@@ -34,5 +35,11 @@ public class JsonDataController {
 	@ResponseBody
 	public List<ProductDataForAllProducts> getAllProducts(@PathVariable(name = "categoryId") Long categoryId){
 		return productServiceImpl.getAllActiveProductsByCategory(categoryId);
+	}
+	
+	@RequestMapping(value = {Constants.URL_MANAGE_PRODUCTS})
+	@ResponseBody
+	public List<ProductAdminData> getAllProductsForAdmin(){
+		return productServiceImpl.getAllProductsForAdmin();
 	}
 }

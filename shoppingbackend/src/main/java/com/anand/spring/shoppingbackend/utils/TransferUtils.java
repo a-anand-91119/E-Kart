@@ -3,8 +3,10 @@ package com.anand.spring.shoppingbackend.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.anand.spring.shoppingbackend.dto.CategoryData;
 import com.anand.spring.shoppingbackend.dto.CategoryHome;
 import com.anand.spring.shoppingbackend.dto.CategorySideBarData;
+import com.anand.spring.shoppingbackend.dto.ProductAdminData;
 import com.anand.spring.shoppingbackend.dto.ProductData;
 import com.anand.spring.shoppingbackend.dto.ProductDataForAllProducts;
 import com.anand.spring.shoppingbackend.dto.ProductWallpapersData;
@@ -151,7 +153,7 @@ public class TransferUtils {
 		productData.setProductId(product.getProductId());
 		productData.setProductLandscapeUrl(product.getProductLandscapeUrl());
 		if (product.getProductSpecs() != null && !product.getProductSpecs().isEmpty())
-			productData.setProductName(product.getProductName() + "(" + product.getProductSpecs() + ")");
+			productData.setProductName(product.getProductName() + " (" + product.getProductSpecs() + ")");
 		else
 			productData.setProductName(product.getProductName());
 		productData
@@ -169,7 +171,7 @@ public class TransferUtils {
 		return productData;
 	}
 
-	public static Product getProductEntityToCreate(ProductData productData) {
+	public static Product getProductEntityToCreate(ProductData productData, boolean isDefaultNeeded) {
 		Product product = new Product();
 		product.setProductBrand(productData.getProductBrand());
 		product.setProductCategoryId(productData.getProductCategoryId());
@@ -183,7 +185,81 @@ public class TransferUtils {
 		product.setProductSpecs(productData.getProductSpecification());
 		product.setProductSupplierId(productData.getProductSupplierId());
 		product.setProductUnitPrice(productData.getProductUnitPrice());
-		product.setDefaults();
+		if (isDefaultNeeded)
+			product.setDefaults();
+		else {
+			product.setProductId(productData.getProductId());
+			product.setProductOverallrating(productData.getProductOverallrating());
+			product.setProductRating1(productData.getProductRating1());
+			product.setProductRating2(productData.getProductRating2());
+			product.setProductRating3(productData.getProductRating3());
+			product.setProductRating4(productData.getProductRating4());
+			product.setProductRating5(productData.getProductRating5());
+			product.setProductPurchases(productData.getProductPurchases());
+			product.setProductViews(productData.getProductViews());
+		}
+
 		return product;
+	}
+
+	public static List<ProductAdminData> getAllProductsForAdmin(List<Product> fetchedData) {
+		List<ProductAdminData> productReturn = new ArrayList<ProductAdminData>();
+
+		if (fetchedData != null)
+			for (Product product : fetchedData) {
+
+				ProductAdminData productAdminData = new ProductAdminData();
+				productAdminData.setProductCode(product.getProductCode());
+				productAdminData.setProductDescription(product.getProductDescription());
+				productAdminData.setProductName(product.getProductName());
+				productAdminData.setProductOverallrating(
+						computeOveralllRating(product.getProductRating1(), product.getProductRating2(),
+								product.getProductRating3(), product.getProductRating4(), product.getProductRating5()));
+				productAdminData.setProductPortraitUrl(product.getProductPortraitUrl());
+				productAdminData.setProductLandscapeUrl(product.getProductLandscapeUrl());
+				productAdminData.setProductUnitPrice(product.getProductUnitPrice());
+				productAdminData.setProductQuantity(product.getProductQuantity());
+				productAdminData.setProductBrand(product.getProductBrand());
+				productAdminData.setProductCategoryId(product.getProductCategoryId());
+				productAdminData.setProductId(product.getProductId());
+				productAdminData.setProductSupplierId(product.getProductSupplierId());
+				productAdminData.setProductIsActive(product.getProductIsActive());
+				productAdminData.setProductSpecification(product.getProductSpecs());
+				productReturn.add(productAdminData);
+			}
+
+		return productReturn;
+	}
+
+	public static ProductData getProductDataForEdit(Product product) {
+		ProductData productData = new ProductData();
+		productData.setProductBrand(product.getProductBrand());
+		productData.setProductSupplierId(product.getProductSupplierId());
+		productData.setProductCode(product.getProductCode());
+		productData.setProductCategoryId(product.getProductCategoryId());
+		productData.setProductDescription(product.getProductDescription());
+		productData.setProductId(product.getProductId());
+		productData.setProductLandscapeUrl(product.getProductLandscapeUrl());
+		productData.setProductPortraitUrl(product.getProductPortraitUrl());
+		productData.setProductName(product.getProductName());
+		productData.setProductSpecification(product.getProductSpecs());
+		productData.setProductPurchases(product.getProductPurchases());
+		productData.setProductRating1(product.getProductRating1());
+		productData.setProductRating2(product.getProductRating2());
+		productData.setProductRating3(product.getProductRating3());
+		productData.setProductRating4(product.getProductRating4());
+		productData.setProductRating5(product.getProductRating5());
+		productData.setProductUnitPrice(product.getProductUnitPrice());
+		productData.setProductViews(product.getProductViews());
+		productData.setProductQuantity(product.getProductQuantity());
+		return productData;
+	}
+
+	public static Category getCategoryForDbInsert(CategoryData categoryData) {
+		Category category = new Category();
+		category.setCategoryDescription(categoryData.getCategoryDescription());
+		category.setCategoryName(categoryData.getCategoryName());
+		category.setCategoryThumbnailURL(categoryData.getCategoryThumbnailUrl());
+		return category;
 	}
 }
