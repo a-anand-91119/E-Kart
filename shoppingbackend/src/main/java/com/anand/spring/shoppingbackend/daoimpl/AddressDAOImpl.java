@@ -2,16 +2,22 @@ package com.anand.spring.shoppingbackend.daoimpl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-import com.anand.spring.shoppingbackend.dao.DAO;
+import com.anand.spring.shoppingbackend.dao.AddressDAO;
 import com.anand.spring.shoppingbackend.entities.Address;
 import com.anand.spring.shoppingbackend.exceptions.InvalidAddressIdException;
 
-public class AddressDAOImpl implements DAO {
+@Repository
+@Transactional
+@SuppressWarnings("unchecked")
+public class AddressDAOImpl implements AddressDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -92,6 +98,26 @@ public class AddressDAOImpl implements DAO {
 
 		for (Object id : ids)
 			deleteById(id);
+	}
+
+	@Override
+	public List<Address> getAllShippingAddress(Long userId) {
+		String customQuery = "FROM Address WHERE addressUserId = :userId AND addressShipping = true";
+
+		Query<?> query = sessionFactory.getCurrentSession().createQuery(customQuery);
+		query.setParameter("userId", userId);
+
+		return (List<Address>) query.getResultList();
+	}
+
+	@Override
+	public List<Address> getAllBillingAddress(Long userId) {
+		String customQuery = "FROM Address WHERE addressUserId = :userId AND addressBilling = true";
+
+		Query<?> query = sessionFactory.getCurrentSession().createQuery(customQuery);
+		query.setParameter("userId", userId);
+
+		return (List<Address>) query.getResultList();
 	}
 
 }

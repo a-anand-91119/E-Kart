@@ -1,10 +1,12 @@
 package com.anand.spring.shoppingbackend.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -42,6 +44,9 @@ public class User {
 	@Column(name = "ud_phone_number")
 	private String userPhoneNumber;
 
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	private ShoppingCart shoppingCart; 
+	
 	public User() {
 		super();
 	}
@@ -57,6 +62,14 @@ public class User {
 		this.userPassword = userPassword;
 		this.userEmailAddress = userEmailAddress;
 		this.userPhoneNumber = userPhoneNumber;
+	}
+
+	public ShoppingCart getShoppingCart() {
+		return shoppingCart;
+	}
+
+	public void setShoppingCart(ShoppingCart shoppingCart) {
+		this.shoppingCart = shoppingCart;
 	}
 
 	public Long getUserId() {

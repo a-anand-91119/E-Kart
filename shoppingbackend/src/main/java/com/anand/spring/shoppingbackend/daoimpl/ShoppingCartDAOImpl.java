@@ -31,6 +31,7 @@ public class ShoppingCartDAOImpl implements DAO {
 			sessionFactory.getCurrentSession().persist((ShoppingCart) object);
 			return true;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 	}

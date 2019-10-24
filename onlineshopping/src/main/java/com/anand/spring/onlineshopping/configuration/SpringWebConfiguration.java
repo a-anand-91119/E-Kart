@@ -1,10 +1,10 @@
 package com.anand.spring.onlineshopping.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartResolver;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -12,6 +12,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.springframework.webflow.mvc.servlet.FlowHandlerAdapter;
+import org.springframework.webflow.mvc.servlet.FlowHandlerMapping;
 
 import com.anand.spring.onlineshopping.utils.Constants;
 
@@ -26,6 +28,9 @@ import com.anand.spring.onlineshopping.utils.Constants;
 @EnableWebMvc
 public class SpringWebConfiguration implements WebMvcConfigurer{
 
+	@Autowired
+	private SpringWebFlowConfiguration springWebFlowConfiguration;
+	
 	@Bean
 	public ViewResolver getViewResolver() {
 		InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
@@ -44,5 +49,21 @@ public class SpringWebConfiguration implements WebMvcConfigurer{
 	@Bean
 	public MultipartResolver multipartResolver() {
 		return new StandardServletMultipartResolver();
+	}
+	
+	@Bean 
+	public FlowHandlerMapping getFlowHandlerMapping() {
+		FlowHandlerMapping flowHandlerMapping = new FlowHandlerMapping();
+		/*flowHandlerMapping.setOrder(-1);*/
+		flowHandlerMapping.setFlowRegistry(springWebFlowConfiguration.getFlowDefinitionRegistry());
+		return flowHandlerMapping;
+	}
+	
+	@Bean
+	public FlowHandlerAdapter getFlowHandlerAdapter() {
+		FlowHandlerAdapter flowHandlerAdapter = new FlowHandlerAdapter();
+		flowHandlerAdapter.setFlowExecutor(springWebFlowConfiguration.getFlowExecutor());
+		flowHandlerAdapter.setSaveOutputToFlashScopeOnRedirect(true);
+		return flowHandlerAdapter;
 	}
 }

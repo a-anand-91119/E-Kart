@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -21,8 +23,9 @@ public class ShoppingCart {
 	@Column(name = "sc_id")
 	private Long cartId;
 
-	@Column(name = "sc_user_id")
-	private Long cartUser;
+	@OneToOne
+	@JoinColumn(name = "sc_user_id", referencedColumnName = "ud_Id")
+	private User user;
 
 	@Column(name = "sc_cart_line")
 	private Long cartNoOfItems;
@@ -34,12 +37,19 @@ public class ShoppingCart {
 		super();
 	}
 
-	public ShoppingCart(Long cartId, Long cartUser, Long cartNoOfItems, Double cartTotal) {
+	public ShoppingCart(Long cartId, Long cartNoOfItems, Double cartTotal) {
 		super();
 		this.cartId = cartId;
-		this.cartUser = cartUser;
 		this.cartNoOfItems = cartNoOfItems;
 		this.cartTotal = cartTotal;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Long getCartId() {
@@ -48,14 +58,6 @@ public class ShoppingCart {
 
 	public void setCartId(Long cartId) {
 		this.cartId = cartId;
-	}
-
-	public Long getCartUser() {
-		return cartUser;
-	}
-
-	public void setCartUser(Long cartUser) {
-		this.cartUser = cartUser;
 	}
 
 	public Long getCartNoOfItems() {
@@ -76,8 +78,7 @@ public class ShoppingCart {
 
 	@Override
 	public String toString() {
-		return "ShoppingCart [cartId=" + cartId + ", cartUser=" + cartUser + ", cartNoOfItems=" + cartNoOfItems
-				+ ", cartTotal=" + cartTotal + "]";
+		return "ShoppingCart [cartId=" + cartId + ", cartNoOfItems=" + cartNoOfItems + ", cartTotal=" + cartTotal + "]";
 	}
 
 }

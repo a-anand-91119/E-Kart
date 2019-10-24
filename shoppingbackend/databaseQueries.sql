@@ -2,7 +2,7 @@ DROP ALL OBJECTS;
 
 CREATE TABLE CATEGORY (
 
-	c_id IDENTITY,
+	c_id INT AUTO_INCREMENT,
 	c_name VARCHAR(50),
 	c_description VARCHAR(500),
 	c_thumbnail_url VARCHAR(1000),
@@ -26,7 +26,7 @@ VALUES ('Video Games', 'videogame.png', 'E-Kart offers you a range of options, f
 
 CREATE TABLE USER_DETAILS (
 	
-	ud_Id IDENTITY,
+	ud_Id INT AUTO_INCREMENT,
 	ud_first_name VARCHAR(50),
 	ud_last_name VARCHAR(50),
 	ud_role VARCHAR(50),
@@ -39,9 +39,20 @@ CREATE TABLE USER_DETAILS (
 
 );
 
+CREATE TABLE SHOPPING_CART (
+
+	sc_id INT AUTO_INCREMENT,
+	sc_user_id INT,
+	sc_cart_line INT,
+	sc_total DOUBLE,
+	
+	CONSTRAINT PK_SHOPPING_CART PRIMARY KEY (sc_id),
+	CONSTRAINT FK_CART_USER_ID FOREIGN KEY (sc_user_id) REFERENCES USER_DETAILS (ud_id)
+);
+
 CREATE TABLE ADDRESS (
 
-	a_id IDNENTITY,
+	a_id INT AUTO_INCREMENT,
 	a_user_id INT,
 	a_addressline_one VARCHAR(1000),
 	a_addressline_two VARCHAR(1000),
@@ -56,17 +67,6 @@ CREATE TABLE ADDRESS (
 	CONSTRAINT FK_ADDRESS_USER_ID FOREIGN KEY (a_user_id) REFERENCES USER_DETAILS (ud_Id)
 );
 
-CREATE TABLE SHOPPING_CART (
-
-	sc_id IDENTITY,
-	sc_user_id INT,
-	sc_cart_line INT,
-	sc_total DOUBLE
-	
-	CONSTRAINT PK_SHOPPING_CART PRIMARY KEY (sc_id),
-	CONSTRAINT FK_SHOPPING_CART_USER_ID FOREIGN KEY (sc_user_id) REFERENCES USER_DETAILS (ud_Id)
-); 
-
 INSERT INTO USER_DETAILS(ud_first_name, ud_last_name, ud_role, ud_enabled, ud_password, ud_email_address, ud_phone_number)
 VALUES ('Anand', 'A', 'ADMIN', true, '********', 'asd@gmail.com', '9876543210');
 
@@ -78,7 +78,7 @@ VALUES ('Supplier', 'Two', 'SUPPLIER', true, 'password', 'xyz@gmail.com', '32189
 
 CREATE TABLE PRODUCT (
 
-	p_id IDENTITY,
+	p_id INT AUTO_INCREMENT,
 	p_code VARCHAR(20),
 	p_name VARCHAR(100),
 	p_specs VARCHAR(2000),

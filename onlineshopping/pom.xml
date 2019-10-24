@@ -18,7 +18,7 @@
 		<junit-version>4.12</junit-version>
 		<backend-version>0.0.1-SNAPSHOT</backend-version>
 		<javax-servlet-api-version>4.0.1</javax-servlet-api-version>
-
+		<spring-webflow-version>2.5.1.RELEASE</spring-webflow-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -53,6 +53,11 @@
 					<artifactId>commons-logging</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.webflow</groupId>
+			<artifactId>spring-webflow</artifactId>
+			<version>${spring-webflow-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>

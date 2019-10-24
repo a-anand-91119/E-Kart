@@ -68,6 +68,7 @@ public class SpringRootConfiguration {
 		hibernateProperties.setProperty("hibernate.dialect", Constants.HIBERNATE_DIALECT);
 		hibernateProperties.setProperty("hibernate.show_sql", Constants.HIBERNATE_SHOW_SQL);
 		hibernateProperties.setProperty("hibernate.format_sql", Constants.HIBERNATE_FORMAT_SQL);
+		hibernateProperties.setProperty("hibernate.hbm2ddl.auto", Constants.HIBERNATE_HBM2DDL_AUTO);
 		return hibernateProperties;
 	}
 }
