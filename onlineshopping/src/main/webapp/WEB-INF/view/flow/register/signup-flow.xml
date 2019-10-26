@@ -2,14 +2,48 @@
 <flow xmlns="http://www.springframework.org/schema/webflow"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/webflow
-                          http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
-	<view-state id="personal"
-		view="flow/register/flow-views/signup-personal"/>
-
-	<end-state id="home"
-		view="externalRedirect:contextRelative:/" />
+	<var name="userRegister" class="com.anand.spring.shoppingbackend.dto.UserRegister" />
+	<var name="billingAddress" class="com.anand.spring.shoppingbackend.dto.AddressTO" />
 		
+	<on-start>
+		<evaluate expression="registerFlowHandler.getRegistrationModel" result="flowScope.registrationModel"/>
+	</on-start>	
+	
+	<view-state id="personal"
+		view="flow/register/flow-views/signup-personal" model="userRegister">
+		<transition on="billing" to="billing" />
+		<on-exit>
+			<evaluate expression="registerFlowHandler.addUserToModel(flowScope.registrationModel, userRegister)"/>
+		</on-exit>
+	</view-state>
+
+	<view-state id="billing"
+		view="flow/register/flow-views/signup-billing" model="billingAddress">
+		<transition on="confirm" to="confirm"/>
+		<transition on="personal" to="personal"/>
+		<on-exit>
+			<evaluate expression="registerFlowHandler.addBillingAddressToModel(flowScope.registrationModel, billingAddress)"/>
+		</on-exit>
+	</view-state>
+
+	<view-state id="confirm"
+		view="flow/register/flow-views/signup-confirm" model="flowSope.registrationModel">
+		<transition on="billing" to="billing"/>
+		<transition on="personal" to="personal"/>
+		<transition on="submit" to="submit"/>
+	</view-state>
+	
+	<action-state id="submit">
+		<evaluate expression="registerFlowHandler.saveAll(flowScope.registrationModel)"/>
+		<transition on="success" to="success"/>
+	</action-state>
+
+	<end-state id="home" view="externalRedirect:contextRelative:/" />
+
+	<end-state id="success" view="flow/register/flow-views/signup-success" />
+
 	<global-transitions>
 		<transition on="home" to="home" />
 	</global-transitions>

@@ -3,6 +3,7 @@ package com.anand.spring.shoppingbackend.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.anand.spring.shoppingbackend.dto.AddressTO;
 import com.anand.spring.shoppingbackend.dto.CategoryData;
 import com.anand.spring.shoppingbackend.dto.CategoryHome;
 import com.anand.spring.shoppingbackend.dto.CategorySideBarData;
@@ -10,8 +11,12 @@ import com.anand.spring.shoppingbackend.dto.ProductAdminData;
 import com.anand.spring.shoppingbackend.dto.ProductData;
 import com.anand.spring.shoppingbackend.dto.ProductDataForAllProducts;
 import com.anand.spring.shoppingbackend.dto.ProductWallpapersData;
+import com.anand.spring.shoppingbackend.dto.UserRegister;
+import com.anand.spring.shoppingbackend.entities.Address;
 import com.anand.spring.shoppingbackend.entities.Category;
 import com.anand.spring.shoppingbackend.entities.Product;
+import com.anand.spring.shoppingbackend.entities.ShoppingCart;
+import com.anand.spring.shoppingbackend.entities.User;
 
 /**
  * The Class TransferUtils performs all the converstion from Entities into Data
@@ -261,5 +266,35 @@ public class TransferUtils {
 		category.setCategoryName(categoryData.getCategoryName());
 		category.setCategoryThumbnailURL(categoryData.getCategoryThumbnailUrl());
 		return category;
+	}
+
+	public static User createUserEntity(UserRegister userRegister) {
+		User user = new User();
+		user.setUserRole(userRegister.getUserRole());
+		if(user.getUserRole().equals(Constants.ROLE_USER)) {
+			ShoppingCart shoppingCart = new ShoppingCart();
+			user.setShoppingCart(shoppingCart);
+			shoppingCart.setUser(user);
+		}
+		user.setUserPassword(userRegister.getUserPassword());
+		user.setUserEmailAddress(userRegister.getUserEmailAddress());
+		user.setUserFirstName(userRegister.getUserFirstName());
+		user.setUserLastName(userRegister.getUserLastName());
+		user.setUserPhoneNumber(userRegister.getUserPhoneNumber());
+		return user;
+	}
+
+	public static Address createAddressEntity(AddressTO addressToSave, Long userId) {
+		Address address = new Address();
+		address.setAddressCity(addressToSave.getAddressCity());
+		address.setAddressPostalCode(addressToSave.getAddressPostalCode());
+		address.setAddressLineTwo(addressToSave.getAddressLineTwo());
+		address.setAddressBilling(addressToSave.getAddressBilling());
+		address.setAddressShipping(addressToSave.getAddressShipping());
+		address.setAddressUserId(userId);
+		address.setAddressState(addressToSave.getAddressState());
+		address.setAddressCountry(addressToSave.getAddressCountry());
+		address.setAddressLineOne(addressToSave.getAddressLineOne());
+		return address;
 	}
 }

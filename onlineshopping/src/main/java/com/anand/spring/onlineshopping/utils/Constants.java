@@ -34,5 +34,9 @@ public class Constants {
 	public static final String URL_SAVE_UPDATE_PRODUCT = "/product/{productCode}/save";
 	public static final String URL_ADD_CATEGORY = "/category/add";
 	public static final String URL_PRODUCT_ADD = "/products/add";
+	
+	public static final String ROLE_USER = "USER";
+	public static final String ROLE_SUPPLIER = "SUPPLIER";
+
 
 }

@@ -13,31 +13,19 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>E-Kart - ${title}</title>
+<title>E-Kart - Register</title>
 
 <core:url var="bootstrapMinCss"
 	value="/resources/vendor/bootstrap/css/bootstrap.min.css" />
-<core:url var="bootstrapMinJs"
-	value="/resources/vendor/bootstrap/js/bootstrap.min.js" />
 <core:url var="bootstrapCss"
 	value="/resources/vendor/bootstrap/css/bootstrap.css" />
 <core:url var="pageCss" value="/resources/css/shop-homepage.css" />
 <core:url var="registerCss" value="/resources/css/register.css" />
-<core:url var="customJs" value="/resources/js/customJs.js" />
-<core:url var="jqueryValidate"
-	value="/resources/js/jquery.validate.js" />
-<core:url var="fontAwesomeJs" value="/resources/js/font-awesome.js" />
-<core:url var="jqueryDataTables"
-	value="/resources/vendor/DataTables/jquery.dataTables.min.js" />
 <core:url var="jqueryDataTablesCss"
 	value="/resources/vendor/DataTables/jquery.dataTables.min.css" />
 <core:url var="dataTablesBootstrapResponsiveCss"
 	value="/resources/vendor/DataTables/dataTables.bootstrap4.min.css" />
-<core:url var="dataTablesBootstrapResponsiveJs"
-	value="/resources/vendor/DataTables/dataTables.bootstrap4.min.js" />
-<core:url var="jQuery" value="/resources/vendor/jquery/jquery.min.js" />
-<core:url var="bootstrapMinJs"
-	value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js" />
+
 <core:url var="urlSmartAlert"
 	value="/resources/vendor/sweetalert2/sweetalert2.all.min.js" />
 <core:url var="urlSmartAlertPolyfill"
@@ -63,5 +51,5 @@
 	<div class="main-wrapper">
 
 		<!-- Navigation -->
-		<jsp:include page="flow-navigation-bar.jsp" />
+		<%-- <jsp:include page="flow-navigation-bar.jsp" /> --%>
 		<!-- Navigation -->	

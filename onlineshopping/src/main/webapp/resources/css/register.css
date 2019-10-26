@@ -135,9 +135,9 @@ px
 .register .nav-tabs {
 	margin-top: 3%;
 	border: none;
-	background: #0062cc;
+	background: #000000;
 	border-radius: 1.5rem;
-	width: 28%;
+	width: 25%;
 	float: right;
 }
 
@@ -156,8 +156,8 @@ px
 
 .register .nav-tabs .nav-link.active {
 	width: 100px;
-	color: #0062cc;
-	border: 2px solid #0062cc;
+	color: #000000;
+	border: 2px solid #000000;
 	border-top-left-radius: 1.5rem;
 	border-bottom-left-radius: 1.5rem;
 }
