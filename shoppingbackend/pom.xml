@@ -20,7 +20,7 @@
 		<logback-version>1.2.3</logback-version>
 		<jackson-version>2.10.0</jackson-version>
 		<apache-dbcp2-version>2.7.0</apache-dbcp2-version>
-		<hibernate-version>5.4.6.Final</hibernate-version>
+		<hibernate-version>5.4.31.Final</hibernate-version>
 		<hiberanate-validator-version>6.1.0.Final</hiberanate-validator-version>
 		<javax-validation-version>2.0.1.Final</javax-validation-version>
 		<maven.compiler.target>1.8</maven.compiler.target>
