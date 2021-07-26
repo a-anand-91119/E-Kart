@@ -17,7 +17,7 @@
 		<spring-version>5.2.0.RELEASE</spring-version>
 		<h2-version>1.4.199</h2-version>
 		<junit-version>4.13.1</junit-version>
-		<logback-version>1.2.3</logback-version>
+		<logback-version>1.2.5</logback-version>
 		<jackson-version>2.10.0</jackson-version>
 		<apache-dbcp2-version>2.7.0</apache-dbcp2-version>
 		<hibernate-version>5.4.6.Final</hibernate-version>
