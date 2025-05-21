@@ -21,7 +21,7 @@
 		<h2-version>2.3.232</h2-version>
 		<jackson-version>2.19.0</jackson-version>
 		<apache-dbcp2-version>2.13.0</apache-dbcp2-version>
-		<hiberanate-validator-version>8.0.2.Final</hiberanate-validator-version>
+		<hiberanate-validator-version>9.0.0.Final</hiberanate-validator-version>
 		<javax-validation-version>2.0.1.Final</javax-validation-version>
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
