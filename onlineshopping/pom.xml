@@ -13,7 +13,7 @@
 
 	<properties>
 		<javaee-version>8.0.1</javaee-version>
-		<spring-version>6.1.20</spring-version>
+		<spring-version>6.1.21</spring-version>
 		<jstl-version>1.2</jstl-version>
 		<junit-version>4.13.1</junit-version>
 		<backend-version>0.0.1-SNAPSHOT</backend-version>
