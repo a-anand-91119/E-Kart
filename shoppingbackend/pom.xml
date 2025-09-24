@@ -18,7 +18,7 @@
 		<logback-version>1.5.18</logback-version>
 		<spring-version>6.2.11</spring-version>
 		<junit-version>4.13.2</junit-version>
-		<h2-version>2.3.232</h2-version>
+		<h2-version>2.4.240</h2-version>
 		<jackson-version>2.20</jackson-version>
 		<apache-dbcp2-version>2.13.0</apache-dbcp2-version>
 		<hiberanate-validator-version>9.0.1.Final</hiberanate-validator-version>
