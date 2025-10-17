@@ -16,7 +16,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<hibernate-version>5.6.15.Final</hibernate-version>
 		<logback-version>1.5.19</logback-version>
-		<spring-version>6.2.11</spring-version>
+		<spring-version>6.2.12</spring-version>
 		<junit-version>4.13.2</junit-version>
 		<h2-version>2.4.240</h2-version>
 		<jackson-version>2.20</jackson-version>
